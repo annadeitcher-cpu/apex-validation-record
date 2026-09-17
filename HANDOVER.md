@@ -21,7 +21,7 @@ Everything in this system computes dates relative to `REFERENCE_DATE`/`now()`, n
 
 ## 3. Environment / how to actually run things
 
-- **This is a git repo with zero commits.** `git status` confirms: branch `main`, everything untracked, nothing has ever been staged or committed. Nobody has asked for a commit yet — don't create one without being asked.
+- **Remote repo**: https://github.com/annadeitcher-cpu/apex-validation-record (private). `origin` on `main` points here. This went through churn: first pushed under `annadeitcher-dot`, deleted, then recreated and pushed under `annadeitcher-cpu` (the personal account) after an explicit `gh auth switch`. `gh auth status` shows both accounts still authenticated — confirm `annadeitcher-cpu` is still the active one before creating or pushing to any new repo, don't assume.
 - Python: **use the project venv**, not bare `python`/`python3` — the system Python doesn't have the deps. Run everything as:
   ```
   /Users/anna.deitcher/apex/.venv/bin/python scripts/<whatever>.py ...
