@@ -1,0 +1,8 @@
+[
+  {"op": "update", "id": "9afde220-83f4-4aca-b431-1db6a7387d94", "owner_role": "ae", "owner_name": "Rachel Kim", "description": "Prepare real pricing against the discussed scope and respond directly to Tracewell's lower price. Owen wants this sooner than two weeks.", "due_date": "2026-09-18", "is_blocker": true},
+  {"op": "insert", "owner_role": "sc", "owner_name": "Marcus Webb", "description": "Check with Apex's deal desk for a comparable or accelerated procurement path to offset Tracewell's master-agreement advantage.", "due_date": "2026-09-18", "is_blocker": true},
+  {"op": "insert", "owner_role": "ae", "owner_name": "Rachel Kim", "description": "Confirm what flexibility exists on contract length before responding to Owen.", "due_date": "2026-09-18", "is_blocker": false},
+  {"op": "insert", "owner_role": "sc", "owner_name": "Marcus Webb", "description": "Write up concrete technical differentiation against Tracewell for Owen, not a general maturity claim.", "due_date": "2026-09-18", "is_blocker": false},
+  {"op": "insert", "owner_role": "customer", "owner_name": "Lisa Ferreira", "description": "Estimate telematics-matching timeline, on the same schedule as Rachel's pricing follow-up.", "due_date": "2026-09-18", "is_blocker": false},
+  {"op": "insert", "owner_role": "customer", "owner_name": "Owen Brady", "description": "Confirm whether the master agreement covers data platform spend specifically, or needs a separate rider.", "due_date": "2026-09-25", "is_blocker": false}
+]

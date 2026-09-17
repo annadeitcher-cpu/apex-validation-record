@@ -1,0 +1,117 @@
+{
+  "stakeholders": [
+    {
+      "name": "Priya Raman",
+      "title": "VP, Data Platform",
+      "evidence_quotes": [
+        "So, the short version — our existing BAA language, the way it's actually written, covers third-party processing broadly enough that it doesn't need a full renegotiation.",
+        "I made sure legal mapped it specifically to what I asked for, too, not just a general assurance about the platform.",
+        "I did, and I have an answer. Dana Whitfield, from marketing ops.",
+        "How does a week from this coming Thursday work for you both"
+      ]
+    },
+    {
+      "name": "Naomi Fletcher",
+      "title": "Staff Data Architect",
+      "evidence_quotes": [
+        "Quietly proceeding, honestly, nothing dramatic to report. We're partway into the mapping work, on pace for the timeline we talked about last time",
+        "I'll make sure Curtis hears that directly, he'll appreciate it",
+        "That tracks, marketing's been heads-down on something else for a few weeks now, I'd heard the same thing secondhand from a friend over there."
+      ]
+    },
+    {
+      "name": "Curtis Nam",
+      "title": "Security Engineer",
+      "evidence_quotes": [
+        "Curtis says hi, by the way, he couldn't make it today, some internal thing came up on his end, nothing to do with any of this.",
+        "I'll make sure Curtis hears that directly, he'll appreciate it, honestly, I think he was a little worried his original answer was going to look wrong in hindsight, even though nobody said that.",
+        "Bye, everyone, I'll go find Curtis and give him the good news in person."
+      ]
+    },
+    {
+      "name": "Dana Whitfield",
+      "title": "marketing ops (segment owner, newly named)",
+      "evidence_quotes": [
+        "Dana Whitfield, from marketing ops.",
+        "She already does a version of this informally, honestly, she was the one people quietly routed segment questions to anyway",
+        "I talked to her manager, it's official as of this week, she's the named point of contact for segment quality and adoption going forward, not just informally the person people happen to ask."
+      ]
+    }
+  ],
+  "objections": [
+    {
+      "text": "BAA / staging-layer PHI coverage — legal has now confirmed a short amendment closes the gap, Priya states explicit satisfaction",
+      "evidence_quotes": [
+        "our existing BAA language, the way it's actually written, covers third-party processing broadly enough that it doesn't need a full renegotiation. What it needs is a short amendment, specifically naming the staging-layer window",
+        "I asked them directly — does the amendment language name the pre-normalization staging window specifically, not just processing broadly — and they confirmed yes, that's exactly what it does.",
+        "I can say, at this point, what Curtis said back on the first call — I came away satisfied.",
+        "Either way, from where I sit, I'm not treating this as open anymore. It's resolved on the substance, it's just waiting on ink at this point."
+      ]
+    }
+  ],
+  "integration_patterns": [
+    {
+      "description": "Status check on the Teradata call-center connector mapping work — on pace, no design change",
+      "systems": ["Teradata", "Snowflake"],
+      "evidence_quotes": [
+        "We're partway into the mapping work, on pace for the timeline we talked about last time, nothing's surfaced that changes that estimate.",
+        "The schema's messier than I'd like in a couple of spots, but nothing that's actually blocking progress, just the normal amount of annoying.",
+        "That tracks with what we've seen on our side too, nothing's come up that changes the connector design we walked through last time."
+      ]
+    }
+  ],
+  "success_criteria": [],
+  "competitive_mentions": [],
+  "product_relevance_candidates": [],
+  "next_step_candidate": {
+    "present": true,
+    "evidence_quotes": [
+      "How does a week from this coming Thursday work for you both — that gives me enough runway to have the signed amendment in hand and to have actually sat with the numbers properly, rather than reacting live.",
+      "Okay, no, that's clear on my end, Thursday works.",
+      "Hang on, actually — I think I might have something that morning, let me check. Yeah, I've got an internal thing that morning, but I should be free by early afternoon your time.",
+      "Let's say afternoon, then, and I'll put a placeholder time and we can nudge it if it's awkward for anyone once it's actually on the calendar.",
+      "I'll get that on the calendar today and send an invite with an agenda attached, so it doesn't turn into an unstructured status check with nothing new to actually decide."
+    ]
+  },
+  "open_risks_candidates": [
+    {
+      "note": "Legacy marketing/campaign-authoring tool question — still genuinely unresolved, doesn't block anything",
+      "evidence_quotes": [
+        "I do want to give you an honest update on the other thing I said I'd chase, which is the legacy marketing tool question. And the honest update is: I don't have an answer yet.",
+        "their answer was basically \"we're mid-way through a totally unrelated tooling evaluation right now and don't want to make this decision in isolation from that.\"",
+        "So it's still genuinely open, not resolved, not close to resolved, I don't want to pretend otherwise",
+        "I don't think it blocks anything, no. Nothing we've architected assumes either outcome",
+        "I'd rather it stay visible, even unresolved, than disappear quietly."
+      ]
+    },
+    {
+      "note": "Segment-ownership risk from prior versions appears resolved — Dana Whitfield named as owner",
+      "evidence_quotes": [
+        "I talked to her manager, it's official as of this week, she's the named point of contact for segment quality and adoption going forward",
+        "That's a relief, honestly, I think that's been sitting open since the very first call we had."
+      ]
+    },
+    {
+      "note": "BAA-driven timeline-extension risk from prior versions appears resolved — amendment confirmed short, not a renegotiation",
+      "evidence_quotes": [
+        "it doesn't need a full renegotiation. What it needs is a short amendment",
+        "I'd guess a week, maybe a little less, but I don't want to commit you to a date I made up."
+      ]
+    },
+    {
+      "note": "Derek's-inbox/offboarding risk from prior versions appears resolved — SOC 2 report landed directly with Priya and Curtis, IT swept the inbox, nothing else important turned up",
+      "evidence_quotes": [
+        "It landed, yes, both Curtis and I got it directly this time, no Derek's-inbox detour required.",
+        "I did have IT sweep his inbox too, for what it's worth, nothing else important turned up, so that particular worry turned out to be smaller than I'd braced for."
+      ]
+    },
+    {
+      "note": "Minor, unconfirmed: whether the BAA amendment needs an extra internal governance-review step beyond legal signature",
+      "evidence_quotes": [
+        "does the amendment need to go back through any kind of governance review on your side, or is it purely a legal signature at this point?",
+        "As far as I know it's purely a legal signature... But I'll double check that assumption rather than just assert it confidently and be wrong.",
+        "I'll confirm and let you know if I'm wrong about it being that simple."
+      ]
+    }
+  ]
+}

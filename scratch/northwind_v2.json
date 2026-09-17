@@ -1,0 +1,137 @@
+{
+  "version": 2,
+  "source_call_ids": ["179964ca-3df7-4d3e-a3f8-85147e7460f8", "52e59a02-e68a-4b60-9b7d-589260971e0a"],
+  "status": "complete",
+  "narrative": {
+    "whats_happened": "Owen Brady, Director of RevOps, joined for the first time. Lisa reported back on the correlating-fields mapping from the first call: the WMS-TMS join key is solid across every facility, including the weakest site, so that piece is no longer a real risk. Telematics-side matching still has no clean shipment-level identifier and needs real modeling work; how long that takes is still unknown.\n\nOwen opened with direct commercial pressure: Northwind is actively evaluating Tracewell in parallel, with a lower quoted price and a three-week pilot timeline. Tracewell's parent company also already holds a master services agreement with Northwind's finance organization from an unrelated business line, which makes procurement meaningfully easier on Northwind's side regardless of which vendor technically wins. Rachel's first answer pivoted to a technical strength instead of the commercial question Owen actually asked; Owen called it a dodge directly, and Rachel corrected course and committed to a real follow-up covering pricing, procurement friction, contract-length flexibility, and a sharper technical comparison.\n\nNothing was resolved today, deliberately. Owen wants something back sooner than two weeks or Tracewell becomes the more likely path, primarily on procurement grounds rather than a judged technical preference. Kenji flagged that Tracewell's architecture likely doesn't handle identifier matching with the same depth, but that alone won't settle it for Owen.",
+    "whats_blocking": {
+      "blocking": [
+        "Whether Apex can answer Tracewell's price and procurement advantage credibly before Northwind's informal window closes. Owen said sooner than two weeks, ideally.",
+        "How long telematics-side identifier matching will actually take. Still unknown, and it now feeds directly into the competitive timeline argument.",
+        "Whether existing dashboards can be repointed at the new data or need rebuilding. Still open, not discussed this call."
+      ],
+      "not_blocking": [
+        "WMS-TMS matching feasibility. Confirmed workable at every facility, including the weakest site.",
+        "No proactive prevention of conflicting rule definitions. Lisa already accepted this as a process problem for her team."
+      ]
+    },
+    "ae_actions": [
+      "Prepare real pricing against the discussed scope, ready sooner than two weeks per Owen's stated timeline.",
+      "Check with Apex's own deal desk for a comparable accelerated procurement path to offset Tracewell's master-agreement advantage.",
+      "Find out what flexibility exists on contract length before responding to Owen.",
+      "Send Owen a specific, concrete technical comparison against Tracewell, not a general maturity claim."
+    ],
+    "sc_loop_close": "Nothing technical from earlier calls got reopened this call. Lisa's mapping confirmed the WMS-TMS pattern holds at every facility. The one open technical question is how long telematics-specific matching will take, and Marcus was right not to commit to a number before Lisa has real data. That estimate now has real competitive weight behind it, since Owen is using timeline as part of his Tracewell comparison.",
+    "sc_actions": [
+      "Provide a concrete technical differentiation write-up against Tracewell, not a general maturity claim.",
+      "Give Lisa's telematics-matching timeline estimate once she has it, on the same timeline as the pricing follow-up."
+    ]
+  },
+  "stage_exit_criteria": [
+    {"criterion": "All technical objections resolved or accepted", "owner": "SC", "met": false, "reason": "Whether Northwind's existing dashboards need to be rebuilt or can be repointed at the new data is still open."},
+    {"criterion": "Economic buyer identified", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Integration approach agreed", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Next step scheduled with owner and date", "owner": "AE", "met": false, "reason": "A follow-up is committed but no specific date has been set; Owen asked for something back sooner than two weeks."},
+    {"criterion": "Success criteria captured in customer's words", "owner": "AE", "met": true, "reason": null}
+  ],
+  "stakeholders": [
+    {
+      "name": "Kenji Watanabe",
+      "title": "Head of Data Platform",
+      "role_inference": "champion",
+      "confidence": "high",
+      "first_seen_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8",
+      "last_seen_call": "52e59a02-e68a-4b60-9b7d-589260971e0a",
+      "status": "active",
+      "evidence": "I can advocate for it, and I think the operational case is strong, but I don't want to represent that I can just greenlight a number the way maybe someone in my exact seat could at a different company."
+    },
+    {
+      "name": "Lisa Ferreira",
+      "title": "Senior Analytics Engineer",
+      "role_inference": "technical_evaluator",
+      "confidence": "high",
+      "first_seen_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8",
+      "last_seen_call": "52e59a02-e68a-4b60-9b7d-589260971e0a",
+      "status": "active",
+      "evidence": "I'm probably going to be the one actually building and living with whatever we end up doing here."
+    },
+    {
+      "name": "Owen Brady",
+      "title": "Director, RevOps",
+      "role_inference": "economic_buyer",
+      "confidence": "high",
+      "first_seen_call": "52e59a02-e68a-4b60-9b7d-589260971e0a",
+      "last_seen_call": "52e59a02-e68a-4b60-9b7d-589260971e0a",
+      "status": "new_this_call",
+      "evidence": "I want to understand, from a commercial standpoint, why we'd go with you over them, because right now I don't have a clean answer to that, and I'm the one who's going to get asked."
+    }
+  ],
+  "objections": [
+    {"objection_id": "obj_01", "text": "Skepticism that \"unification\" claims are credible, given a prior vendor's automatic-unification promise turned out to mean nothing", "category": "integration", "status": "resolved", "confidence": "high", "resolution_note": "Marcus explained matching logic is deliberate and auditable, not an autonomous black-box; Lisa confirmed this was the most credible answer she could have hoped for.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_02", "text": "Concern that blending data of different quality/reliability (structured telematics vs. manual carrier updates) would lose the distinction between them", "category": "integration", "status": "resolved", "confidence": "high", "resolution_note": "Marcus confirmed source quality/recency is carried alongside the data itself rather than flattened; Lisa accepted this as a good answer with nothing left conceded.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_03", "text": "Whether out-of-order status updates from slower-reporting carriers get handled correctly", "category": "performance", "status": "resolved", "confidence": "high", "resolution_note": "Marcus explained event-time-based resolution with flagging of genuinely suspicious sequences; Lisa called it better thought through than expected.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_04", "text": "Whether a rule that should have fired but didn't can be diagnosed as easily as one that did fire", "category": "performance", "status": "resolved", "confidence": "high", "resolution_note": "Marcus confirmed historical state queries support exactly this case; Lisa said she was glad it wasn't an afterthought.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_05", "text": "No proactive prevention of two people defining conflicting or duplicate rules", "category": "other", "status": "partially_resolved", "confidence": "high", "resolution_note": "Marcus was direct that this isn't solved by the tooling, only visibility into existing rules is provided; Lisa explicitly accepted this as a process problem for her team rather than a blocker.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_06", "text": "Risk of alert fatigue from badly-tuned thresholds, similar to muted channels on tools Northwind already runs", "category": "other", "status": "resolved", "confidence": "high", "resolution_note": "Marcus described a shadow-mode tuning approach before alerts reach a human; Lisa said it specifically addressed what she was worried about.", "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"},
+    {"objection_id": "obj_07", "text": "Whether existing dashboards can be repointed at the new unified data or need to be rebuilt from scratch", "category": "integration", "status": "open", "confidence": "high", "resolution_note": null, "raised_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8", "last_updated_call": "179964ca-3df7-4d3e-a3f8-85147e7460f8"}
+  ],
+  "integration_patterns": [
+    {
+      "description": "Initial phase scoped to telematics, WMS, and TMS integration via Streamline Ingest, with matching logic against best-available correlating identifiers (shipment number, PO reference, trailer ID); ERP integration deferred to a later phase.",
+      "systems": ["WMS", "TMS", "Telematics", "ERP (deferred)"],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "Lisa's mapping confirmed the WMS-TMS shipment reference join key is populated in 90%+ of records fleet-wide (98-99% at newer facilities, low 80s at the weakest site) and is workable everywhere. Telematics-side matching has no clean shipment-level identifier and will require real modeling work, as anticipated; how long that takes is still unknown."
+    }
+  ],
+  "success_criteria": [
+    {"customer_words": "It took, I want to say, most of a day to actually piece together why it happened, and by then the customer relationship damage was already done", "interpreted": "Diagnosing an operational discrepancy currently takes most of a day of cross-team effort; Northwind needs that fast enough to get ahead of the customer, not after the relationship damage is done.", "metric_stated": "most of a day"},
+    {"customer_words": "our current telematics feed batches every fifteen minutes, so even the \"current\" position data we're looking at is stale by the time anyone sees it", "interpreted": "Telematics position data needs to be close to real time, not on a fifteen-minute batch delay.", "metric_stated": "fifteen minutes"}
+  ],
+  "competitive": [
+    {
+      "vendor": "Corvus",
+      "context_verbatim": "we did a brief look at Corvus, which I think does something adjacent to this, more on the visibility and tracking side specifically. Neither of those really addressed the underlying unification problem though, they were both kind of bolted onto one system's view of the world rather than actually pulling everything together, so we didn't get very far with either of them.",
+      "evaluation_status": "mentioned_only",
+      "confidence": "high",
+      "rationale": "Closed, historical evaluation raised only in passing while discussing lineage and debugging. Kenji explicitly frames it as old vendor history, separate from today's evaluation, with no live comparison or commercial terms mentioned. Not revisited this call.",
+      "suggested_positioning": ""
+    },
+    {
+      "vendor": "TMS vendor's add-on (unnamed)",
+      "context_verbatim": "We looked at a couple things at the time, there was a smaller add-on our TMS vendor sells... Neither of those really addressed the underlying unification problem though, they were both kind of bolted onto one system's view of the world rather than actually pulling everything together, so we didn't get very far with either of them.",
+      "evaluation_status": "mentioned_only",
+      "confidence": "high",
+      "rationale": "Same closed, historical evaluation as the Corvus mention, raised in the same breath as old vendor history. No name given beyond \"a smaller add-on our TMS vendor sells.\" Not revisited this call.",
+      "suggested_positioning": ""
+    },
+    {
+      "vendor": "Tracewell",
+      "context_verbatim": "We're not only looking at you all. We've also been talking to a company called Tracewell, they do something pretty similar on the surface, and they've been pretty aggressive about it... their number's lower... they told us three weeks to a live pilot... Our finance org already has a master agreement in place with Tracewell's parent company, through a completely different part of the business... That makes the paperwork a lot easier on our end if we go with them versus standing up a brand new vendor relationship from scratch.",
+      "evaluation_status": "actively_evaluating",
+      "confidence": "high",
+      "rationale": "Live, named, parallel evaluation with real commercial terms in play: a lower quoted price, a three-week pilot timeline, and an existing master services agreement through Tracewell's parent company that eases Northwind's procurement. Owen is driving this directly and named an explicit informal decision window (\"the next little while\").",
+      "suggested_positioning": "Tracewell's price and procurement advantage are real and shouldn't be dismissed. The master services agreement between Northwind's finance org and Tracewell's parent company is a legitimate procurement edge, not a myth; acknowledge it directly, check with Apex's own deal desk for a comparable accelerated path, and reframe to total friction over the life of the relationship rather than just signature speed, only if that's genuinely true for Northwind's case. On architecture, Tracewell does not attempt real cross-system identity resolution; it's a dashboard layer on one system's view, not a unification platform, so their quoted three-week pilot is almost certainly narrower in scope than what's being proposed here. Find out exactly what their three weeks covers before treating it as comparable, and answer Owen's commercial question directly before bringing in technical differentiation, not instead of it."
+    }
+  ],
+  "product_relevance": [
+    {"need_stated": "our current telematics feed batches every fifteen minutes, so even the \"current\" position data we're looking at is stale by the time anyone sees it", "relevant_release": "Streamline Ingest — brings ingestion from Northwind's current fifteen-minute batch cadence down to sub-minute, directly matching the gap Lisa described.", "confidence": "high"},
+    {"need_stated": "right now when something like that goes wrong, half the debugging time is just figuring out which of those three things it even was", "relevant_release": "Lineage Graph — turns \"was the rule wrong, was the data late, or was the data wrong\" into a lookup instead of a forensic exercise, the exact three-way ambiguity Kenji described.", "confidence": "high"}
+  ],
+  "next_step": {
+    "present": true,
+    "described": "Rachel to come back with real pricing against the discussed scope, a response to the procurement/master-agreement friction, contract-length flexibility, a sharper technical comparison against Tracewell, and Lisa's estimate on telematics-matching timeline. Owen wants this sooner than two weeks.",
+    "owner": "AE",
+    "date_committed": null,
+    "confidence": "medium"
+  },
+  "open_risks": [
+    {"risk": "Telematics-side identifier matching still has no clean shipment-level key and requires real modeling work; how long that actually takes is unknown, and it now feeds directly into Northwind's competitive timeline comparison.", "severity": "medium", "confidence": "high"},
+    {"risk": "Northwind is actively evaluating Tracewell in parallel. Owen wants something back sooner than two weeks or Tracewell becomes the more likely path, primarily on procurement grounds.", "severity": "high", "confidence": "high"},
+    {"risk": "Whether Northwind's existing dashboards can be repointed at the new data or need to be rebuilt is unresolved and was not discussed this call.", "severity": "low", "confidence": "medium"}
+  ],
+  "change_events": [
+    {"event_type": "stakeholder_added", "materiality": "minor", "detail": {"name": "Owen Brady", "title": "Director, RevOps", "note": "Joined for the first time. His commercial significance is captured separately via the competitor_introduced event for Tracewell, not double-counted here."}},
+    {"event_type": "competitor_introduced", "materiality": "material", "detail": {"vendor": "Tracewell", "evaluation_status": "actively_evaluating", "terms": "Lower quoted price; three-week pilot timeline; existing master services agreement between Northwind's finance org and Tracewell's parent company easing procurement."}}
+  ]
+}

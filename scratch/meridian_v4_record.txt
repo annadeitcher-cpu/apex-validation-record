@@ -1,0 +1,40 @@
+📌 *VALIDATION RECORD — v4* · Meridian Health — Customer Data Platform
+_Current state of the technical validation. This message updates in place._
+---
+*Meridian Health — Customer Data Platform*
+$310,000 · *25 days in Technical Validation* — 2x the 12-day Apex average · win rate drops to 22% past 14 days
+---
+*What's happened*
+Priya Raman, VP of Data Platform, confirmed the BAA question is resolved. Legal came back with a short amendment naming the staging-layer window specifically, not a full renegotiation, and Priya said explicitly she's satisfied. Marcus's technical answer never changed. This was always a paperwork gap, and it's closed. Only the signature is outstanding.
+
+Priya also named a segment owner. Dana Whitfield, from marketing ops, is now the formal point of contact for segment quality and adoption, closing an item open since the first call. The SOC 2 report landed directly this time, and an IT sweep of Derek's old inbox turned up nothing else important.
+
+One thing stays open: whether this platform eventually absorbs campaign authoring or the legacy tool stays in place alongside it. Priya chased marketing directly and still has no answer. Nothing currently planned depends on it, so it isn't blocking.
+---
+*Progress toward stage exit — 5 of 5*
+✅ Technical objections resolved or accepted — Marcus
+✅ Economic buyer identified — Daniel
+✅ Integration approach agreed — Marcus
+✅ Next step scheduled — Daniel
+✅ Success criteria captured — Daniel
+---
+*What's blocking us*
+Nothing. All five stage-exit criteria are met.
+• BAA amendment: resolved on substance, only the signature is outstanding.
+• Legacy marketing tool scope: still undecided, but nothing planned depends on the answer.
+---
+*Daniel — AE*
+1. Send the calendar invite and a real agenda for the commercial conversation by *Thu Sep 17*.
+2. Update internal records so Dana Whitfield is the point of contact for segment work by *Fri Sep 18*.
+3. Check back with Priya on whether the BAA amendment needs a governance step beyond legal signature. No date committed — she's confirming this week.
+---
+*Marcus — SC*
+1. Nothing technical is blocking this deal.
+---
+*Need from Meridian*
+1. Priya to attend the commercial conversation on *Tue Sep 24* ready to make a decision.
+2. Priya to confirm whether the amendment needs governance review. No date committed.
+---
+*Worth raising*
+• *Consent Sync.* Opt-outs live in four separate systems today, so a patient can opt out of texts and still get an email. Consent Sync puts them all in one place. Raised on call one, still not addressed as its own topic.
+• *Lineage Graph.* Curtis asked whether he could prove a specific patient wasn't contacted after opting out. Lineage Graph answers that for any individual record. Raised on call one, still not addressed as its own topic.

@@ -1,0 +1,7 @@
+[
+  {"op": "insert", "owner_role": "ae", "owner_name": "Rachel Kim", "description": "Send the calendar invite for the follow-up call.", "due_date": "2026-09-18", "is_blocker": true},
+  {"op": "insert", "owner_role": "ae", "owner_name": "Rachel Kim", "description": "Check in with Kenji on timing for bringing Northwind's RevOps stakeholder into a future call.", "due_date": "2026-09-18", "is_blocker": false},
+  {"op": "insert", "owner_role": "ae", "owner_name": "Rachel Kim", "description": "Prepare directional pricing; hold off on a specific number until Lisa's mapping clarifies scope.", "due_date": "2026-09-18", "is_blocker": false},
+  {"op": "insert", "owner_role": "customer", "owner_name": "Lisa Ferreira", "description": "Map correlating fields across WMS, TMS, and telematics to gauge the identifier-matching gap.", "due_date": "2026-09-18", "is_blocker": true},
+  {"op": "insert", "owner_role": "customer", "owner_name": "Kenji Watanabe", "description": "Loop in Northwind's RevOps stakeholder so budget ownership is real, not just advocacy.", "due_date": "2026-09-18", "is_blocker": false}
+]

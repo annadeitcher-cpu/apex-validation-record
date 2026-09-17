@@ -1,0 +1,31 @@
+🤝 *HANDOFF TO CUSTOMER SUCCESS* · Meridian Health — Customer Data Platform
+_Posted at close. Everything Elena inherits, drawn from the record above._
+---
+*Meridian Health — Customer Data Platform handoff for Elena*
+$310,000 · closed won
+
+Hey @Elena — here's what you're inheriting on this one.
+---
+*What they think they bought*
+Care-gap outreach today is a manual spreadsheet handoff, cross-checked by hand against consent and reachability. It's slow and periodically breaks down. Last year two outreach programs texted the same patients in the same week and it became an escalation. Compliance needs proof, at the individual level, that a specific person wasn't contacted after opting out. Some records carry roughly seven-year retention requirements. The addressable population is about 400,000 people, with single campaigns running up to 60,000-70,000 during open enrollment.
+---
+*What we committed to*
+• *Consent Sync.* One place tracks opt-outs so every channel sees them. Their legacy dialer checks on a schedule instead of getting a live signal. Opt-out category setup is real work.
+• *Care-gap segmentation.* Outreach lists build directly off their clinical care-gap data. Apex doesn't decide who's overdue for care.
+• *Dialer integration.* The legacy dialer gets a scheduled list, not a live feed, still a big step up from today's manual process. Phase one is email only; the dialer comes later.
+• *Data sourcing.* Most data is already in Snowflake. One narrow connector reaches their older Teradata system just for call center consent, retired once that system is. Their old marketing CRM is skipped, it's being phased out. Naomi's team needs a few days over a couple weeks; Priya committed to protecting it.
+• *Lineage.* Every outreach event traces back to the record and rule that produced it, kept as long as needed, with a real export.
+• *Schema alerts.* A breaking source change triggers an alert. A field disappearing still needs a manual fix.
+• *De-identified analytics.* Analysts can work against de-identified data, scoped to their use case. Meridian's compliance team decides what counts as de-identified.
+---
+*What you're inheriting*
+Nothing is open. The one objection that mattered — whether the BAA covers PHI at the staging layer — is resolved. Legal confirmed a short amendment names that window specifically, and Priya Raman said so explicitly, the same way Curtis Nam signed off technically back on the first call. Only the signature was outstanding as of close.
+---
+*Who's here now vs. who bought*
+Derek Osei, Director of Data Engineering, was the champion who drove this deal from the first call. No economic buyer had been identified as of that call. Derek left the company before close. Priya Raman, VP of Data Platform, took over starting with the third call. She has real budget authority Derek never had, and she's the first person on this deal anyone identified as economic buyer. You're onboarding someone who wasn't in the room for the original pitch. Naomi Fletcher is still engaged throughout. One more name worth knowing: Dana Whitfield, marketing ops, was named segment owner just before close — your point of contact for segment work going forward, not someone from the original buying conversation.
+---
+*Risks*
+Whether this platform replaces or just sits alongside Meridian's legacy marketing CRM is still undecided. Marketing hasn't weighed in.
+---
+*Freshness*
+The record was last updated 4 days before close.
