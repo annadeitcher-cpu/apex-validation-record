@@ -63,6 +63,8 @@ CONVERSATION = [
 
     # Short exchange after the technical validation call — Curtis's questions
     ("Marcus Webb (SC)", ":man:", "that ran long lol. curtis had like 20 min of questions on tokenization/encryption"),
+    ("Elena Restrepo (CSM)", ":woman:", "ooh what specifically did curtis push back on? want to flag it if it's a pattern"),
+    ("Marcus Webb (SC)", ":man:", "nothing major tbh, just wanted the details on how it all works, not really objections"),
     ("Marcus Webb (SC)", ":man:", "think it landed ok, he said he was satisfied by the end"),
     ("Marcus Webb (SC)", ":man:", "soc2 going out under nda today"),
 
@@ -82,7 +84,7 @@ CONVERSATION = [
     ("Marcus Webb (SC)", ":man:", "tbh not really, still getting the new person up to speed"),
 ]
 
-CLUSTER_STARTS = {4, 7, 10, 13}  # indices where a new cluster begins (0 excluded, nothing to pause before)
+CLUSTER_STARTS = {4, 9, 12, 15}  # indices where a new cluster begins (0 excluded, nothing to pause before)
 CLUSTER_PAUSE_SECONDS = 4
 
 

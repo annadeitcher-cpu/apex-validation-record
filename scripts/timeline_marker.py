@@ -27,6 +27,13 @@ every deal in this system is built. If that version doesn't exist yet, or
 exists but predates `stage_exit_criteria` being part of the contract (true
 for some early seed data), the banner reads "no record" rather than
 guessing or erroring.
+
+The middle line's call-progress phrasing depends on whether --call is the
+deal's last call or an earlier one, compared against the live count from
+`calls`: "Backfilling call N of (total-1)" for any call before the last —
+the go-live framing, catching the system up on history that predated it —
+and "Processing call N (live)" for the last call, with no "of" denominator
+since there's nothing after it to be mid-way through.
 """
 
 import argparse
@@ -83,10 +90,15 @@ def render(day, opportunity_name, acv, stage, days_in_stage, call_number, total_
     acv_str = f"${acv:,.0f}" if acv is not None else "(ACV not set)"
     criteria_str = f"{exit_criteria[0]} of {exit_criteria[1]}" if exit_criteria else "no record"
 
+    if call_number >= total_calls:
+        call_line = f"Processing call {call_number} (live)"
+    else:
+        call_line = f"Backfilling call {call_number} of {max(total_calls - 1, 0)}"
+
     lines = [
         f"DAY {day} · {opportunity_name} · {acv_str}",
         f"Stage: {stage.upper()} ({days_in_stage} day{'s' if days_in_stage != 1 else ''})",
-        f"Call {call_number} of {total_calls} · Exit criteria: {criteria_str}",
+        f"{call_line} · Exit criteria: {criteria_str}",
     ]
 
     width = max(len(l) for l in lines) + 4

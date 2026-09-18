@@ -1,0 +1,38 @@
+📌 *VALIDATION RECORD — v2* · Meridian Health — Customer Data Platform
+_Current state of the technical validation. This message updates in place._
+---
+*Meridian Health — Customer Data Platform*
+$310,000 · *23 days in Technical Validation* — 92% over the 12-day Apex average · win rate drops to 22% past 14 days
+---
+*What's happened*
+Meridian Health's second call resolved the Teradata vs. Snowflake sourcing question. Naomi Fletcher's table mapping showed most of the required data is already in Snowflake. The one holdout is the call center system holding opt-out records, which will get one scoped Teradata connector.
+
+That connector adds real, accepted latency on the consent signal, minutes instead of near-real-time. Derek Osei and Naomi endorsed the plan as concrete, not deferred. Economic sign-off still sits with a VP of Data Platform who hasn't joined a call.
+
+Derek raised a new question. Nobody currently owns ongoing segment and audience maintenance once the platform goes live. He asked Daniel to fold a recommendation into the proposal rather than solve it today.
+---
+*Progress toward stage exit — 3 of 5*
+✅ Technical objections resolved — Marcus
+✅ Integration approach agreed — Marcus
+✅ Success criteria captured — Daniel
+❌ Economic buyer identified — Daniel · sign-off still sits with a VP of Data Platform who hasn't joined a call
+❌ Next step scheduled — Daniel · only a rough two-week reconvene target was given, no date is committed
+---
+*What's blocking us*
+🔴 No internal owner exists yet for ongoing segment and audience maintenance once the platform is live. Derek wants a recommendation folded into the proposal before this gets decided.
+• Economic sign-off: still open. The VP of Data Platform hasn't engaged directly, briefed only secondhand by Derek.
+• Teradata connector latency and the appointment-reminder timing risk from call one: both accepted, not blocking.
+---
+*Daniel — AE*
+1. Build a full priced proposal for the Snowflake-primary architecture, including a segment-ownership recommendation and a before/after effort comparison. Send it to Derek by *Thu Oct 1*.
+---
+*Marcus — SC*
+1. Send Curtis a written note on the new Teradata connector for the call-center consent data by *Mon Sep 21*. He wasn't live on this call.
+---
+*Need from Meridian*
+1. Work with Derek to get a real reconvene date once he's reviewed the proposal. Target *Thu Oct 1*.
+2. Work with Derek to get the VP of Data Platform on a call. No date set yet; sign-off still runs through Derek secondhand.
+---
+*Worth raising*
+• *Consent Sync.* Opt-out status lives in four separate systems today, so a patient can opt out on one channel and still get contacted on another. Consent Sync puts every channel's opt-out status in one place. Curtis raised this on call one.
+• *Lineage Graph.* Curtis asked whether Apex could prove a specific patient wasn't contacted after opting out. Lineage Graph answers that for any individual record with a structured export. Curtis raised this on call one.
