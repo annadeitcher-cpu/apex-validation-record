@@ -43,7 +43,7 @@
 
 ## 2. The Solution in One Sentence
 
-*When a technical validation call ends, a structured Validation Record is created for the opportunity and posted to the deal's Slack channel. It updates in place as the deal progresses. The AE gets a drafted follow-up. The SC gets their summary pre-written and a loop-close when the deal moves. CS inherits a current record instead of a stale one. One nudge, in DM, if nothing happens in 72 hours.*
+*When a technical validation call ends, a structured Validation Record is created for the opportunity and posted to the deal's Slack channel. It updates in place as the deal progresses. CS inherits a current record instead of a stale one. If an action item goes 72 hours past due, its owner gets a private reminder — and a public one at seven days if that goes unaddressed.*
 
 **The architectural claim that makes this a system and not a summarizer:** the Record is scoped to the *opportunity*, not the call. It accrues. Version 1 from the technical validation and version 3 from six weeks later are different objects, and the diff between them is the deal's actual story.
 
@@ -323,9 +323,8 @@ Real free workspace, not a mockup. ~15 min: create workspace → create app → 
 |---|---|---|
 | **Pinned message, deal channel** | The Record itself, updated in place | Shared context. CS has been watching it accrue for six weeks before handoff |
 | **Channel post** | "What changed" — only on `materiality: material` | Objection resurfaced, stakeholder added, champion changed, competitor introduced |
-| **DM to SC** | Pre-drafted summary doc (approve/correct), and loop-close when the deal advances | Deletes their work; gives them the thing they said they never get |
-| **DM to AE** | Drafted follow-up email, recommended next step, open risks | Drafts only. Never sends |
-| **DM to AE, 72h** | Single nudge if no logged activity | |
+| **DM to AE or SC, 72h** | Private reminder naming the specific missed action item and its due date | Escalation is never a surprise |
+| **Channel post, 7 days** | Public escalation if the private reminder went unaddressed, names which stage-exit criterion it's gating if any | One nudge, one escalation — nags once |
 | **Manager, day 7** | Surfaces in existing pipeline review | Private, low-frequency, already in the rhythm |
 
 **The line for the room:** *"A public artifact builds shared context. A public nudge is a public shaming, and reps route around systems that embarrass them. Information is public. Accountability is private."*
@@ -336,9 +335,9 @@ That distinction is the practitioner judgment the JD is screening for. Say it de
 
 Every hygiene win comes from **removing work, not adding it.**
 
-- SC completion goes 60% → 90% because the doc arrives pre-drafted and the job is to correct and approve. 30 seconds instead of 15 minutes.
+- SC review time drops because the Record already reflects what happened on the call, extracted from the transcript — nothing to write from scratch.
 - Next steps get logged because the system extracted the one already agreed on the call and asks for confirmation.
-- Touch count rises because the follow-up is drafted and waiting.
+- Missed items get caught within 72 hours by a private reminder instead of going silent for a week.
 
 Exactly **one** nudge and **one** escalation in the entire system. *"The more this system nags, the faster it dies, so it nags once."*
 
@@ -349,7 +348,7 @@ Exactly **one** nudge and **one** escalation in the entire system. *"The more th
 ### 30 days — Adoption
 - Coverage: % of technical validation calls producing a complete Record (target 95%)
 - Record open rate in channel; AE packet open rate within 24h
-- **Edit-and-send rate** on the drafted email within 48h (the real adoption metric — passive opens don't count)
+- **Reminder-to-resolution rate** within 72h (the real adoption metric — passive opens don't count)
 - SC summary completion: 60% → 90%
 - Median hours from demo to first logged touch
 
@@ -383,8 +382,7 @@ Have these ready. The assessment says they'll ask.
 1. **False-resolved objections.** Highest-probability failure. Detection: SC correction rate on the objection block. Mitigation: require customer acceptance evidence; default to `partially_resolved`.
 2. **Notification fatigue.** If materiality gating is too loose, the channel becomes noise and people mute it. Detection: mute rate, dismissal rate, declining open rate. Mitigation: tighten the materiality gate; it's a config change, not a rebuild.
 3. **Silent extraction failure on atypical calls.** Multi-language, bad audio, a call that's actually a working session rather than a demo. Mitigation: `status: failed` is visible and alerts; never post a partial record silently.
-4. **Drafted email gets sent unedited and is wrong.** Mitigation: drafts only, never auto-send, hallucinated-commitment counter at zero tolerance.
-5. **Adoption decays after week 3** once novelty wears off. This is the real risk and it's a product problem, not a technical one. Detection: edit-and-send rate trend. Mitigation: the system has to be *less* work than the status quo, not more. That's why every hygiene mechanism is subtractive.
+4. **Adoption decays after week 3** once novelty wears off. This is the real risk and it's a product problem, not a technical one. Detection: reminder dismissal rate trend. Mitigation: the system has to be *less* work than the status quo, not more. That's why every hygiene mechanism is subtractive.
 
 ---
 
@@ -397,10 +395,10 @@ Supabase project + schema. Generate and hand-check six deals' worth of transcrip
 Build the three-pass chain. Build the eval harness with 12 labeled transcripts. Iterate on resolved/open and stakeholder inference until metrics clear targets. Keep the correction log. *End state: a record you'd show someone.*
 
 **Day 3 — Diff + Slack**
-Slack workspace and app. Pinned-record rendering, `chat.update` in place. Diff logic and materiality gating. AE DM packet, SC DM. *End state: single-call flow works end to end.*
+Slack workspace and app. Pinned-record rendering, `chat.update` in place. Diff logic and materiality gating. Enforcement DM (72h private reminder). *End state: single-call flow works end to end.*
 
 **Day 4 — Accrual + framing**
-Multi-call sequence on Meridian: version 1 → 3 with resurfaced objection and champion change. Thin renderings for CS handoff, SC loop-close, manager escalation (static/hardcoded is fine — label them as mocks). Measurement slides, failure modes. **Record the backup demo video.**
+Multi-call sequence on Meridian: version 1 → 3 with resurfaced objection and champion change. Thin renderings for CS handoff, manager escalation (static/hardcoded is fine — label them as mocks). Measurement slides, failure modes. **Record the backup demo video.**
 
 **Day 5 — Narrative**
 Deck. Rehearse to 20 minutes with a timer. Q&A drills. **Send materials 24 hours ahead** (this is a stated requirement — don't miss it).
@@ -432,8 +430,8 @@ Deck. Rehearse to 20 minutes with a timer. Q&A drills. **Send materials 24 hours
 
 1. **Current state.** The Meridian deal channel as it exists today — AE, SC, CSM in it, and after the technical validation call, silence. That screenshot *is* the problem.
 2. **Run the job.** Record posts and pins. Walk it slowly, once: objections with status, stakeholders with inferred roles and evidence, integration patterns, success criteria in the customer's words, competitive mention, next step.
-3. **AE's DM.** Drafted follow-up. Say plainly: *it drafts, it never sends.*
-4. **Advance three weeks. Run call 2, then call 3.** The pinned Record updates in place. New stakeholder appears. The champion is gone. **The PII objection you marked resolved is back.** Channel gets a short "what changed" post. SC gets their loop-close.
+3. **Enforcement.** An action item goes 72 hours past due. Its owner gets a private reminder. Say plainly: *private first, so escalation is never a surprise.*
+4. **Advance three weeks. Run call 2, then call 3.** The pinned Record updates in place. New stakeholder appears. The champion is gone. **The PII objection you marked resolved is back.** Channel gets a short "what changed" post.
 5. **Jump to close.** Show the CS handoff — and make the point that CS isn't *receiving* anything. They've been in the channel the whole time.
 6. **Ardent Manufacturing.** Four days, no activity. The nudge, in DM, once. Deliver the line about public nudges.
 
@@ -459,7 +457,7 @@ Batch off the warehouse, not per-call API into Gong. One extraction per new call
 Deal channels are internal and access-controlled, and the Record contains strictly less than what already sits in Gong, which the same people already have access to. Verbatim quotes are limited to evidence lines. If policy requires it, the channel post can carry a summary with the full record behind a link.
 
 **"What if reps just ignore it?"**
-That's the real risk, and it's why every hygiene mechanism is subtractive. The SC doc gets done because I deleted the work, not because I added a reminder. The measure that matters is edit-and-send rate, not opens. If that decays after week 3, the system isn't less work than the status quo and I'd rebuild the surface, not add nagging.
+That's the real risk, and it's why every hygiene mechanism is subtractive. SC review time drops because the Record already reflects the call, not because I added a reminder. The measure that matters is reminder-to-resolution rate, not opens. If that decays after week 3, the system isn't less work than the status quo and I'd rebuild the surface, not add nagging.
 
 **"Does this duplicate something Braze already has?"**
 [Fill in from internal knowledge — worth checking before the session.]

@@ -31,14 +31,14 @@
 One object, four renderings:
 - **Pinned canvas/message in the deal channel** — the Record itself, updated in place as the deal progresses
 - **Channel post** — "what changed," only on material events
-- **AE DM** — drafted follow-up email (drafts only, never sends), recommended next step, open risks
-- **SC DM** — pre-drafted summary doc to approve/correct, plus a loop-close when the deal advances
+- **AE or SC DM, 72h** — private reminder naming the specific missed action item and its due date, whoever owns it
+- **Channel post, 7 days** — public escalation if the private reminder went unaddressed, names the stage-exit criterion it's gating if any
 - **CS** — inherits a current Record at handoff, having watched it accrue in-channel for weeks
 - **Manager** — one escalation at day 7, surfaced in the existing pipeline review
 
 **Key design positions to defend:**
 - **Information public, accountability private.** The artifact is public in the deal channel; the nudge is a DM. A public nudge is a public shaming and reps route around systems that embarrass them.
-- **Hygiene through subtraction.** SC completion goes 60% → 90% because the doc arrives pre-drafted, not because of reminders. Every hygiene win comes from deleting work, not adding it.
+- **Hygiene through subtraction.** SC review time drops because the Record already reflects what happened on the call, not because of reminders. Every hygiene win comes from deleting work, not adding it.
 - **One nudge, one escalation.** The more this nags, the faster it dies, so it nags once.
 - **Batch off the warehouse, not per-call Gong API calls.** Cheaper, idempotent, replayable, re-runnable when prompts improve. Supabase stands in for Snowflake.
 - **Accrual is what makes this a system, not a summarizer.** Gong already writes summaries. A summary is prose for one reader at one moment; this is a structured object that accrues, routes to four consumers, and joins to outcomes.
@@ -83,13 +83,13 @@ Also: **no absolute calendar dates, months, years, or quarters appear in any tra
 ## The demo — four commands and a Slack channel
 
 ```bash
-python scripts/run_extraction.py --deal meridian --through-call 1   # Record v1 posts + pins; AE gets drafted email
+python scripts/run_extraction.py --deal meridian --through-call 1   # Record v1 posts + pins
 python scripts/run_extraction.py --deal meridian --through-call 2   # v2 — pin updates IN PLACE; "what changed" post
-python scripts/run_extraction.py --deal meridian --through-call 3   # v3 — objection resurfaced + champion changed; SC loop-close
+python scripts/run_extraction.py --deal meridian --through-call 3   # v3 — objection resurfaced + champion changed
 python scripts/run_nudge.py                                        # finds Ardent, DMs the AE once
 ```
 
-Demo order: show the channel silent after the technical validation (that screenshot *is* the problem) → run call 1, walk the Record slowly → show the AE's drafted email, note it never auto-sends → advance three weeks, run calls 2 and 3, watch the pin change → jump to close, show CS inherited a current record → Ardent nudge, deliver the public-vs-private line.
+Demo order: show the channel silent after the technical validation (that screenshot *is* the problem) → run call 1, walk the Record slowly → advance three weeks, run calls 2 and 3, watch the pin change → jump to close, show CS inherited a current record → Ardent nudge, deliver the public-vs-private line.
 
 ---
 
@@ -148,7 +148,7 @@ If Day 2 runs long, score objection recall and hallucinated commitments only. Tw
 
 ## Measurement framework
 
-**30 days — adoption:** coverage (% of TV calls producing a complete Record), **edit-and-send rate on the drafted email within 48h** (the real adoption metric — opens don't count), SC summary completion 60% → 90%, median hours demo → first logged touch.
+**30 days — adoption:** coverage (% of TV calls producing a complete Record), **reminder-to-resolution rate within 72h** (the real adoption metric — opens don't count), SC summary completion 60% → 90%, median hours demo → first logged touch.
 
 **60 days — behavior:** post-demo touches, **bottom quartile 0.7 → 1.5** (the headline number), middle 50% 1.1 → 1.8, % of deals exiting TV with a logged next step, % with an identified economic buyer before Commercial Negotiation.
 
@@ -165,8 +165,7 @@ If Day 2 runs long, score objection recall and hallucinated commitments only. Tw
 1. **False-resolved objections** — highest probability. Detection: SC correction rate on the objection block. Mitigation: require customer acceptance evidence; default to `partially_resolved`.
 2. **Notification fatigue** — materiality gate too loose → channel gets muted. Detection: mute rate, dismissal rate, declining opens. Mitigation: tighten the gate, a config change not a rebuild.
 3. **Silent extraction failure** on atypical calls (multi-language, bad audio, a working session rather than a demo). Mitigation: `status: failed` is visible and alerts; never post a partial silently.
-4. **Drafted email sent unedited and wrong.** Mitigation: drafts only, hallucinated-commitment counter at zero.
-5. **Adoption decay after week 3** — the real risk, and a product problem not a technical one. Detection: edit-and-send rate trend. Mitigation: the system must be *less* work than the status quo. That's why every hygiene mechanism is subtractive.
+4. **Adoption decay after week 3** — the real risk, and a product problem not a technical one. Detection: reminder dismissal rate trend. Mitigation: the system must be *less* work than the status quo. That's why every hygiene mechanism is subtractive.
 
 ---
 
@@ -178,7 +177,7 @@ If Day 2 runs long, score objection recall and hallucinated commitments only. Tw
 
 **"Customer call content in Slack — security?"** Deal channels are internal and access-controlled. The Record contains strictly less than what's already in Gong, which the same people can already see. Verbatim quotes limited to evidence lines. If policy requires, the channel post can carry a summary with the full record behind a link. The prototype itself uses **100% synthetic data — no real customer content anywhere.**
 
-**"What if reps ignore it?"** The real risk. Every hygiene mechanism is subtractive — the SC doc gets done because I deleted the work, not because I added a reminder. The metric that matters is edit-and-send rate, not opens. If it decays after week 3, the system isn't less work than the status quo and I'd rebuild the surface, not add nagging.
+**"What if reps ignore it?"** The real risk. Every hygiene mechanism is subtractive — SC review time drops because the Record already reflects the call, not because I added a reminder. The metric that matters is reminder-to-resolution rate, not opens. If it decays after week 3, the system isn't less work than the status quo and I'd rebuild the surface, not add nagging.
 
 **"What would you build next?"** The pattern library across Records — which objection-handling approaches precede advancement, which integration concerns recur by vertical, which competitor mentions correlate with stall. Framed as a **shared SC asset, not an individual scorecard.** Needs about a quarter of volume before the patterns are trustworthy; I wouldn't ship it on thin data.
 
@@ -188,7 +187,7 @@ If Day 2 runs long, score objection recall and hallucinated commitments only. Tw
 
 **Do not build:** a web UI (Slack is the interface, Supabase's table view is the admin panel — this is the single biggest time sink and the assessment explicitly says not to polish); real Gong/Salesforce/Snowflake integration (draw the boundary on one slide); cron or orchestration (trigger by command, the schedule is a sentence); retry logic or idempotency guards for cases the demo never hits (*describe* them; implement only the diff logic, which is load-bearing).
 
-**Compressions available if time runs short:** build only the pinned Record and AE DM properly — SC loop-close, CS handoff, and manager escalation can be one hardcoded example each, labeled as mocks. Score only objection recall and hallucinated commitments in the eval.
+**Compressions available if time runs short:** build only the pinned Record and the enforcement DM properly — CS handoff and manager escalation can be one hardcoded example each, labeled as mocks. Score only objection recall and hallucinated commitments in the eval.
 
 **Do not compress:** Meridian 3's accrual demo, extraction quality iteration, the recorded backup demo.
 
