@@ -23,6 +23,18 @@ Does three things, in order:
      checks those to avoid re-sending and will otherwise stay silent on a
      re-run even though nothing else about the deal changed.
 
+Also does a fourth thing: DM reset. escalate.py's Stage 1 reminder is a
+real, delivered Slack DM for any target with a SLACK_USER_<FIRST NAME> on
+file (currently just Daniel) — that DM lands in a 1:1 channel the deal
+channel's own history never touches, so neither this script's channel
+reset nor seed_channel_history.py --reset ever sees it. This app's Slack
+token doesn't have the im:history scope, so it can't list a DM channel's
+history to find what to delete — instead this reads the delivered DM's
+own slack_ts straight out of the notifications row escalate.py already
+wrote (surface dm_ae/dm_sc, payload.delivered == true) and calls
+chat.delete directly against that. Only deletes DMs this app can prove it
+sent; never lists or touches anything else in that 1:1 channel.
+
 Does NOT touch action_items.status or validation_records — check_closure.py
 re-evaluates action items against the same underlying activities/records
 each time and will land on the same statuses, so there's nothing stateful
@@ -65,6 +77,29 @@ def fetch_opportunity(cur, deal_name):
     if len(rows) > 1:
         raise RuntimeError(f"--deal {deal_name!r} is ambiguous, matches: {[r[1] for r in rows]}")
     return rows[0]
+
+
+def reset_dms(client, cur, opportunity_id):
+    cur.execute(
+        "select destination, payload->>'slack_ts' from notifications "
+        "where opportunity_id = %s and surface in ('dm_ae', 'dm_sc') "
+        "and payload->>'delivered' = 'true'",
+        (opportunity_id,),
+    )
+    rows = cur.fetchall()
+    failures = []
+    deleted = 0
+    for destination, slack_ts in rows:
+        if not destination or not slack_ts:
+            continue
+        try:
+            client.chat_delete(channel=destination, ts=slack_ts)
+            deleted += 1
+        except SlackApiError as e:
+            failures.append((slack_ts, e.response.get("error", str(e))))
+    print(f"  dms: deleted {deleted}/{len(rows)} delivered reminder(s).")
+    if failures:
+        raise RuntimeError(f"{len(failures)} DM message(s) could not be deleted: {failures}")
 
 
 def reset_channel(client, channel):
@@ -119,6 +154,7 @@ def main():
 
             print(f"Resetting {opportunity_name}...")
             reset_channel(client, channel)
+            reset_dms(client, cur, opportunity_id)
             reset_stage(cur, opportunity_id, opportunity_name, args.stage, args.days)
             reset_notifications(cur, opportunity_id)
         conn.commit()

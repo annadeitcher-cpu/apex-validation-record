@@ -8,10 +8,18 @@ herself — she's Meridian's employee, not Apex's — her updates only ever
 surface secondhand, inside a message from Marcus or Elena.
 
 Usage:
-    python scripts/seed_channel_history.py            # post the backstory
-    python scripts/seed_channel_history.py --reset    # wipe all prior bot
-                                                        # messages in the
-                                                        # channel, then stop
+    python scripts/seed_channel_history.py               # post the backstory
+    python scripts/seed_channel_history.py --interlude   # post a short human
+                                                           # exchange instead
+    python scripts/seed_channel_history.py --reset       # wipe all prior bot
+                                                           # messages in the
+                                                           # channel, then stop
+
+--interlude is the same idea as the backstory, for a different gap: the
+weeks between the stage exiting Technical Validation and the deal actually
+closing. Run it right after advance_stage.py and before simulate_close.py,
+between two runs of automated Record/handoff posts, so the channel doesn't
+read as a wall of system output with nothing human in it.
 
 This is deliberately the opposite of every other posting script in this
 repo: it does no structuring, no summarizing, no field values, nothing
@@ -87,6 +95,15 @@ CONVERSATION = [
 CLUSTER_STARTS = {4, 9, 12, 15}  # indices where a new cluster begins (0 excluded, nothing to pause before)
 CLUSTER_PAUSE_SECONDS = 4
 
+# Posted between advance_stage.py and simulate_close.py — Daniel (AE) shows
+# up here for the first time, since closing is his news to share.
+INTERLUDE = [
+    ("Marcus Webb (SC)", ":man:", "priya's legal team signed off on the BAA amendment, that was the last blocker on our end"),
+    ("Daniel Okafor (AE)", ":necktie:", "nice, that was fast. contracts are with their procurement now"),
+    ("Elena Restrepo (CSM)", ":woman:", "ooh, exciting. lmk when i should start prepping onboarding"),
+    ("Daniel Okafor (AE)", ":necktie:", "will do, feels close"),
+]
+
 
 def get_bot_id(client):
     return client.auth_test()["bot_id"]
@@ -99,13 +116,13 @@ def channel_id():
     return ch
 
 
-def seed(client, channel):
-    for i, (username, icon, text) in enumerate(CONVERSATION):
-        if i in CLUSTER_STARTS:
+def seed(client, channel, conversation=CONVERSATION, cluster_starts=CLUSTER_STARTS):
+    for i, (username, icon, text) in enumerate(conversation):
+        if i in cluster_starts:
             time.sleep(CLUSTER_PAUSE_SECONDS)
         resp = client.chat_postMessage(channel=channel, username=username, icon_emoji=icon, text=text)
         print(f"  [{resp['ts']}] {username}: {text}")
-    print(f"\nseeded {len(CONVERSATION)} message(s).")
+    print(f"\nseeded {len(conversation)} message(s).")
 
 
 def fetch_all_history(client, channel):
@@ -152,7 +169,10 @@ def reset(client, channel):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--reset", action="store_true", help="delete every message this app has posted in the channel, then stop (does not reseed)")
+    parser.add_argument("--interlude", action="store_true", help="post the short stage-exit-to-close exchange instead of the full backstory")
     args = parser.parse_args()
+    if args.reset and args.interlude:
+        raise RuntimeError("--reset and --interlude are mutually exclusive")
 
     token = os.environ.get("SLACK_BOT_TOKEN", "")
     if not token or not token.startswith("xoxb"):
@@ -162,6 +182,8 @@ def main():
 
     if args.reset:
         reset(client, channel)
+    elif args.interlude:
+        seed(client, channel, conversation=INTERLUDE, cluster_starts=set())
     else:
         seed(client, channel)
 

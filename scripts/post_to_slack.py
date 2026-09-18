@@ -114,6 +114,20 @@ def fetch_pin_notification(cur, opportunity_id):
     return cur.fetchone()
 
 
+def fetch_latest_update_notification(cur, opportunity_id):
+    """Most recent 'what changed' post for this deal, any version — used to
+    delete it before posting a new one, so the channel only ever shows the
+    single most recent 'what changed' message rather than accumulating one
+    per material version."""
+    cur.execute(
+        "select destination, slack_ts from notifications "
+        "where opportunity_id = %s and surface = 'channel_update' "
+        "order by sent_at desc limit 1",
+        (opportunity_id,),
+    )
+    return cur.fetchone()
+
+
 def fetch_update_notification(cur, opportunity_id, version):
     cur.execute(
         "select destination, slack_ts from notifications "
@@ -245,6 +259,17 @@ def main():
                         print(f"Updated existing 'what changed' message {upd_ts} in place.")
                         insert_notification(cur, opportunity_id, "channel_update", upd_destination, upd_ts, {"version": args.version})
                     else:
+                        # A different (older) version's 'what changed' post may still be
+                        # sitting in the channel — delete it so only the current version's
+                        # stays visible, instead of accumulating one per material version.
+                        prior_update = fetch_latest_update_notification(cur, opportunity_id)
+                        if prior_update:
+                            prior_destination, prior_ts = prior_update
+                            try:
+                                client.chat_delete(channel=prior_destination, ts=prior_ts)
+                            except SlackApiError as e:
+                                if e.response.get("error") != "message_not_found":
+                                    raise
                         resp = client.chat_postMessage(channel=channel_id, text=fallback_text(changed_text), blocks=build_blocks(changed_text))
                         print(f"Posted new 'what changed' message {resp['ts']}.")
                         insert_notification(cur, opportunity_id, "channel_update", channel_id, resp["ts"], {"version": args.version})
