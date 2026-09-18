@@ -9,6 +9,15 @@ Stage 1 — private, >=72 hours (3 days) past due. Names the item, the due
 date, and days-in-stage. Sent once — recorded in `notifications` so it
 never repeats.
 
+Real delivery, when a real Slack user id is on file: if `SLACK_USER_<FIRST
+NAME>` (e.g. `SLACK_USER_DANIEL`) is set in .env for the target's first
+name, this actually opens a DM via `conversations.open` and posts there via
+`chat.postMessage` — not simulated. Falls back to the old print-only,
+not-actually-delivered behavior for anyone without a real id on file (still
+true for the SC in this prototype). `opportunities.ae_name`/`sc_name`
+themselves stay plain text either way; the id is looked up separately by
+first name, not stored on the opportunity.
+
 Stage 2 — public, >=7 days past due, posted to the deal channel. Opens with
 the ⚠️ OVERDUE message-type header (see prompts/04_render.md's "Message-type
 header" section — the same convention applies here), then names the item,
@@ -18,9 +27,12 @@ every other posting script in this system — re-running it updates the same
 message in place (via `notifications`) rather than posting a duplicate.
 Only fires if stage 1 has already been recorded (it may be recorded in this
 same run, for an item that's already well past both thresholds — private
-always precedes public, even when catching up on a backlog). Stage 1 is
-never actually posted to Slack (see below), so it carries no message-type
-header — that convention is for real messages in the channel.
+always precedes public, even when catching up on a backlog). Stage 1
+doesn't carry the ⚠️ OVERDUE message-type header even when it's really
+delivered — that convention (see prompts/04_render.md) is for messages
+posted to the shared deal channel, not a 1:1 DM; a DM doesn't need a
+"what is this and why does it exist" banner the way a channel post read
+cold does.
 
 Customer-owned items escalate to the AE, never to the customer — nothing in
 this system ever messages anyone outside Apex. There is no code path here
@@ -71,6 +83,11 @@ def fetch_opportunities(cur, deal_name):
     if len(rows) > 1:
         raise RuntimeError(f"--deal {deal_name!r} is ambiguous, matches: {[r[1] for r in rows]}")
     return rows[0]
+
+
+def real_user_id_for(first_name):
+    """A real Slack user id for this first name, if .env has one on file — else empty string."""
+    return os.environ.get(f"SLACK_USER_{first_name.upper()}", "")
 
 
 def channel_id_for(opportunity_name):
@@ -149,11 +166,15 @@ def find_gating_criterion(cur, opportunity_id, target_role, is_blocker):
     return None
 
 
-def stage1_text(description, due_date, days_in_stage, opportunity_name):
-    return (
-        f"Reminder: \"{description}\" was due {due_date.strftime('%a %b %-d')} and hasn't been marked done.\n"
-        f"{opportunity_name} is {days_in_stage} days into Technical Validation — the Apex average is {TV_AVG_DAYS}."
-    )
+def stage1_text(description, due_date, days_in_stage, opportunity_name, stage):
+    if stage == "Technical Validation":
+        stage_line = f"{opportunity_name} is {days_in_stage} days into Technical Validation — the Apex average is {TV_AVG_DAYS}."
+    else:
+        # Same fix as stage2_text: once the deal has moved on, a live "days in stage" figure
+        # measures the wrong stage entirely (and can go negative if stage_entered_at is now
+        # in the future relative to today, e.g. a simulated close date) — not just stale.
+        stage_line = f"{opportunity_name} has since moved to {stage} — this item was still open at that point."
+    return f"Reminder: \"{description}\" was due {due_date.strftime('%a %b %-d')} and hasn't been marked done.\n{stage_line}"
 
 
 def stage2_text(owner_name, description, due_date, days_late, stage1_sent_at, gating, opportunity_name, days_in_stage, stage):
@@ -207,15 +228,28 @@ def main():
                 stage1_sent_at = already_sent(cur, item_id, dm_surface)
 
                 if days_late >= STAGE1_DAYS and stage1_sent_at is None:
-                    text = stage1_text(description, due_date, days_in_stage, opportunity_name)
-                    print(f"\n--- STAGE 1 (private, would-be DM to {target_name}) ---")
-                    print(text)
-                    print(
-                        f"[not actually delivered — no Slack user id is on file for {target_name!r} in this "
-                        f"prototype; opportunities.ae_name/sc_name are plain text, not Slack identities. "
-                        f"Recorded as sent so it never repeats.]"
-                    )
-                    record_notification(cur, opportunity_id, dm_surface, target_name, item_id)
+                    text = stage1_text(description, due_date, days_in_stage, opportunity_name, stage)
+                    first_name = target_name.split()[0]
+                    real_uid = real_user_id_for(first_name)
+
+                    if real_uid:
+                        dm_channel = client.conversations_open(users=[real_uid])["channel"]["id"]
+                        resp = client.chat_postMessage(channel=dm_channel, text=text)
+                        print(f"\n--- STAGE 1 (private DM, delivered to {target_name} via conversations.open) ---")
+                        print(text)
+                        record_notification(
+                            cur, opportunity_id, dm_surface, dm_channel, item_id,
+                            {"slack_ts": resp["ts"], "delivered": True, "user_id": real_uid},
+                        )
+                    else:
+                        print(f"\n--- STAGE 1 (private, would-be DM to {target_name}) ---")
+                        print(text)
+                        print(
+                            f"[not actually delivered — no SLACK_USER_{first_name.upper()} on file in .env. "
+                            f"Recorded as sent so it never repeats.]"
+                        )
+                        record_notification(cur, opportunity_id, dm_surface, target_name, item_id, {"delivered": False})
+
                     conn.commit()
                     stage1_sent_at = today
 

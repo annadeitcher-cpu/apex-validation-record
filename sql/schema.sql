@@ -2,6 +2,7 @@
 -- Target: Supabase (Postgres 15+), standing in for Snowflake
 -- Safe to re-run: drops and rebuilds everything.
 
+drop table if exists baselines cascade;
 drop table if exists knowledge cascade;
 drop table if exists action_items cascade;
 drop table if exists notifications cascade;
@@ -165,6 +166,31 @@ create table notifications (
 );
 
 -- ---------------------------------------------------------------
+-- Dashboard baselines (docs/dashboard-build-spec.md). Real historical
+-- Apex case data, seeded once by scripts/seed_baselines.py — not
+-- derived from this prototype's own synthetic deals. One heterogeneous
+-- table, same shape convention as `knowledge`: a discriminator column
+-- (`metric`) plus enough dimension columns to place each row, rather
+-- than five separate narrow tables for five unrelated metrics.
+-- ---------------------------------------------------------------
+
+create table baselines (
+  id uuid primary key,
+  metric text not null,        -- 'stage_duration' | 'win_rate_by_tv_days' |
+                               -- 'cs_ttfv' | 'cs_ttfv_correlation' |
+                               -- 'post_demo_touches' | 'sc_summary_completion'
+  segment text,                 -- the bucket within the metric, e.g. a stage
+                               -- name, a day-range, a quartile — null if the
+                               -- metric has no sub-bucket
+  metric_period text,           -- 'Q1' | 'Q2' | 'Q3' for stage_duration; null
+                               -- for metrics with no quarterly breakdown
+  value numeric not null,
+  unit text not null,           -- 'days' | 'pct' | 'ratio' | 'count'
+  source text default 'Apex GTM Assessment packet',
+  note text
+);
+
+-- ---------------------------------------------------------------
 -- Indexes
 -- ---------------------------------------------------------------
 
@@ -181,3 +207,4 @@ create index idx_action_items_opportunity on action_items(opportunity_id, status
 create index idx_action_items_due on action_items(due_date) where status = 'open';
 create index idx_knowledge_kind on knowledge(kind);
 create index idx_knowledge_tags on knowledge using gin(tags);
+create index idx_baselines_metric on baselines(metric);
