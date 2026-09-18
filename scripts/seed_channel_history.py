@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Seed #deal-meridian-health with a scripted "before Baton" backstory: real
+Seed #deal-meridian-health with a scripted "before Mushu" backstory: real
 Slack chatter from the weeks leading up to the demo, posted as Marcus Webb
 and Elena Restrepo via chat.postMessage's username/icon_emoji override
 (requires the chat:write.customize scope). Naomi Fletcher never posts

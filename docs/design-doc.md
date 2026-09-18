@@ -1,4 +1,4 @@
-# Baton: AI System Design and Prototype
+# Mushu: AI System Design and Prototype
 
 **Applied AI Architect, GTM — Assessment Requirement 3**
 

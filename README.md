@@ -1,4 +1,4 @@
-# Baton — Technical Validation Record
+# Mushu — Technical Validation Record
 
 An AI-powered system that turns the gap between a technical validation call and Commercial
 Negotiation from an unowned silence into a living, accruing record — visible to the AE, the SC,
