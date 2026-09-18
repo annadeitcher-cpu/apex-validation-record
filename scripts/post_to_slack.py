@@ -165,6 +165,23 @@ def edit_canvas(client, canvas_id, markdown):
     )
 
 
+def update_or_repost(client, channel_id, destination, ts, text):
+    """Try updating a tracked message in place; if it's gone — e.g. deleted
+    by reset_demo.py's channel wipe, which doesn't clear channel_pin/
+    channel_update/cs_handoff notification rows between takes — post fresh
+    in the current channel instead of failing. Returns (destination, ts,
+    was_freshly_posted)."""
+    if destination and ts:
+        try:
+            client.chat_update(channel=destination, ts=ts, text=fallback_text(text), blocks=build_blocks(text))
+            return destination, ts, False
+        except SlackApiError as e:
+            if e.response.get("error") != "message_not_found":
+                raise
+    resp = client.chat_postMessage(channel=channel_id, text=fallback_text(text), blocks=build_blocks(text))
+    return channel_id, resp["ts"], True
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--deal", required=True)
@@ -197,15 +214,11 @@ def main():
             if args.handoff:
                 latest_version, latest_status = fetch_latest_version(cur, opportunity_id)
                 existing = fetch_handoff_notification(cur, opportunity_id)
-                if existing:
-                    destination, slack_ts = existing
-                    client.chat_update(channel=destination, ts=slack_ts, text=fallback_text(message_text), blocks=build_blocks(message_text))
-                    print(f"Updated existing CS handoff message {slack_ts} in place (against v{latest_version}, {latest_status}).")
-                    insert_notification(cur, opportunity_id, "cs_handoff", destination, slack_ts, {"version": latest_version})
-                else:
-                    resp = client.chat_postMessage(channel=channel_id, text=fallback_text(message_text), blocks=build_blocks(message_text))
-                    print(f"Posted new CS handoff message {resp['ts']} in {channel_id} (against v{latest_version}, {latest_status}).")
-                    insert_notification(cur, opportunity_id, "cs_handoff", channel_id, resp["ts"], {"version": latest_version})
+                prior_destination, prior_ts = existing if existing else (None, None)
+                destination, ts, fresh = update_or_repost(client, channel_id, prior_destination, prior_ts, message_text)
+                verb = "Posted new" if fresh else "Updated existing"
+                print(f"{verb} CS handoff message {ts} in {destination} (against v{latest_version}, {latest_status}).")
+                insert_notification(cur, opportunity_id, "cs_handoff", destination, ts, {"version": latest_version})
                 conn.commit()
                 return
 
@@ -245,9 +258,13 @@ def main():
                     print(f"Updated canvas {canvas_id} in place.")
                     insert_notification(cur, opportunity_id, "channel_pin", destination, None, {"kind": "canvas", "canvas_id": canvas_id})
                 else:
-                    client.chat_update(channel=destination, ts=slack_ts, text=fallback_text(message_text), blocks=build_blocks(message_text))
-                    print(f"Updated pinned message {slack_ts} in place.")
-                    insert_notification(cur, opportunity_id, "channel_pin", destination, slack_ts, {"kind": "pinned_message"})
+                    new_destination, new_ts, fresh = update_or_repost(client, channel_id, destination, slack_ts, message_text)
+                    if fresh:
+                        client.pins_add(channel=new_destination, timestamp=new_ts)
+                        print(f"Prior pinned message was gone — posted and pinned fresh: {new_ts}.")
+                    else:
+                        print(f"Updated pinned message {new_ts} in place.")
+                    insert_notification(cur, opportunity_id, "channel_pin", new_destination, new_ts, {"kind": "pinned_message"})
 
                 if changed_text is None:
                     print("No --changed-file given — leaving the 'what changed' message alone.")
@@ -255,9 +272,10 @@ def main():
                     existing = fetch_update_notification(cur, opportunity_id, args.version)
                     if existing:
                         upd_destination, upd_ts = existing
-                        client.chat_update(channel=upd_destination, ts=upd_ts, text=fallback_text(changed_text), blocks=build_blocks(changed_text))
-                        print(f"Updated existing 'what changed' message {upd_ts} in place.")
-                        insert_notification(cur, opportunity_id, "channel_update", upd_destination, upd_ts, {"version": args.version})
+                        new_destination, new_ts, fresh = update_or_repost(client, channel_id, upd_destination, upd_ts, changed_text)
+                        verb = "Prior 'what changed' message was gone — posted fresh" if fresh else "Updated existing 'what changed' message"
+                        print(f"{verb}: {new_ts}." if fresh else f"{verb} {new_ts} in place.")
+                        insert_notification(cur, opportunity_id, "channel_update", new_destination, new_ts, {"version": args.version})
                     else:
                         # A different (older) version's 'what changed' post may still be
                         # sitting in the channel — delete it so only the current version's
