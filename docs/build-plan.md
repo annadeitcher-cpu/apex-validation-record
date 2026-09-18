@@ -459,9 +459,6 @@ Deal channels are internal and access-controlled, and the Record contains strict
 **"What if reps just ignore it?"**
 That's the real risk, and it's why every hygiene mechanism is subtractive. SC review time drops because the Record already reflects the call, not because I added a reminder. The measure that matters is reminder-to-resolution rate, not opens. If that decays after week 3, the system isn't less work than the status quo and I'd rebuild the surface, not add nagging.
 
-**"Does this duplicate something Braze already has?"**
-[Fill in from internal knowledge — worth checking before the session.]
-
 **"What would you build next?"**
 The pattern library across Records: which objection-handling approaches precede advancement, which integration concerns recur by vertical, which competitor mentions correlate with stall. Framed as a shared SC asset, not an individual scorecard. It needs about a quarter of volume before the patterns are trustworthy — I wouldn't ship it on thin data.
 
