@@ -57,7 +57,7 @@ create table action_items (
 );
 ```
 
-`run_extraction.py` writes action items when it writes a Record version. Dedupe across versions — an item restated in v3 that was already open in v2 is the same item, not a new one. Match on owner plus a semantic comparison of the description, not string equality.
+`write_action_items.py` writes action items when a Record version is written. Dedupe across versions — an item restated in v3 that was already open in v2 is the same item, not a new one. Match on owner plus a semantic comparison of the description, not string equality.
 
 **`scripts/check_closure.py`** runs against `action_items` where `due_date <= today` and `status = 'open'`, and resolves each against evidence:
 
