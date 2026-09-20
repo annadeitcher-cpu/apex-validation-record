@@ -1,0 +1,280 @@
+{
+  "version": 4,
+  "source_call_ids": [
+    "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+    "e3905486-8589-42e0-af2c-f23386f39927",
+    "8d494060-dfc5-460e-9d77-dcf4e0b62357",
+    "d9125f23-c212-422c-b9f3-8cbcb1742683"
+  ],
+  "status": "complete",
+  "narrative": {
+    "whats_happened": "Priya Raman, VP of Data Platform, confirmed Meridian's BAA question is resolved. Legal came back with a short amendment naming the pre-normalization staging window specifically, not a full renegotiation, and Priya said explicitly that she's satisfied — the same bar Curtis Nam met on the first call. Marcus's earlier technical answer never changed; this was always a paperwork gap, not a technical one, and it's closed. Only the signature is still outstanding.\n\nPriya also named a segment owner: Dana Whitfield, from marketing ops, is now the formal point of contact for segment quality and adoption, closing an item that had sat open since the very first call. The SOC 2 report landed directly with Priya and Curtis this time, and an IT sweep of Derek Osei's old inbox turned up nothing else important.\n\nOne thing stays open: whether this platform eventually absorbs campaign authoring or the legacy marketing tool stays in place alongside it. Priya chased marketing directly and still doesn't have an answer — they're mid-way through an unrelated tooling decision of their own. Nothing currently planned depends on the outcome, so it isn't blocking. Priya and Daniel booked a commercial conversation for Sep 24 to react to the proposal and make a real decision.",
+    "whats_blocking": {
+      "blocking": [],
+      "not_blocking": [
+        "BAA amendment — resolved on substance per Priya's explicit acceptance; only the legal signature is outstanding.",
+        "Legacy marketing tool / campaign-authoring scope — still genuinely undecided, but nothing currently planned depends on the answer."
+      ]
+    },
+    "ae_actions": [
+      "Send the calendar invite and a real agenda for the commercial conversation on Sep 24.",
+      "Confirm with Priya whether the BAA amendment needs any internal governance review beyond legal signature, once she checks.",
+      "Update internal records so Dana Whitfield is the point of contact for segment definition and outreach-ops going forward."
+    ],
+    "sc_loop_close": "Nothing technical reopened this call, and nothing new landed for Marcus to own. The atomic-ingestion answer holds unchanged — the BAA resolution was purely a paperwork fix on Meridian's side, not anything Marcus needs to revisit. Nothing technical is blocking this deal.",
+    "sc_actions": []
+  },
+  "stage_exit_criteria": [
+    {"criterion": "All technical objections resolved or accepted", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Economic buyer identified", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Integration approach agreed", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Next step scheduled with owner and date", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Success criteria captured in customer's words", "owner": "AE", "met": true, "reason": null}
+  ],
+  "stakeholders": [
+    {
+      "name": "Derek Osei",
+      "title": "Director, Data Engineering",
+      "role_inference": "champion",
+      "confidence": "high",
+      "first_seen_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "last_seen_call": "e3905486-8589-42e0-af2c-f23386f39927",
+      "status": "departed",
+      "evidence": "Oh — no, actually, Derek's not with us anymore, he left a few weeks back. This is Priya, she's picked up the initiative from here. (Naomi Fletcher)"
+    },
+    {
+      "name": "Naomi Fletcher",
+      "title": "Staff Data Architect",
+      "role_inference": "technical_evaluator",
+      "confidence": "high",
+      "first_seen_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "last_seen_call": "d9125f23-c212-422c-b9f3-8cbcb1742683",
+      "status": "active",
+      "evidence": "We're partway into the mapping work, on pace for the timeline we talked about last time, nothing's surfaced that changes that estimate."
+    },
+    {
+      "name": "Curtis Nam",
+      "title": "Security Engineer",
+      "role_inference": "technical_evaluator",
+      "confidence": "high",
+      "first_seen_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "last_seen_call": "8d494060-dfc5-460e-9d77-dcf4e0b62357",
+      "status": "active",
+      "evidence": "I want to be straightforward, we did go through a version of this last time, pretty thoroughly, and I came away satisfied."
+    },
+    {
+      "name": "Priya Raman",
+      "title": "VP, Data Platform",
+      "role_inference": "economic_buyer",
+      "confidence": "high",
+      "first_seen_call": "8d494060-dfc5-460e-9d77-dcf4e0b62357",
+      "last_seen_call": "d9125f23-c212-422c-b9f3-8cbcb1742683",
+      "status": "active",
+      "evidence": "I made sure legal mapped it specifically to what I asked for, too, not just a general assurance about the platform."
+    },
+    {
+      "name": "Dana Whitfield",
+      "title": "Marketing Ops",
+      "role_inference": "influencer",
+      "confidence": "medium",
+      "first_seen_call": "d9125f23-c212-422c-b9f3-8cbcb1742683",
+      "last_seen_call": "d9125f23-c212-422c-b9f3-8cbcb1742683",
+      "status": "new_this_call",
+      "evidence": "I talked to her manager, it's official as of this week, she's the named point of contact for segment quality and adoption going forward, not just informally the person people happen to ask. (Named by Priya; not present on this call herself.)"
+    }
+  ],
+  "objections": [
+    {
+      "objection_id": "obj_01",
+      "text": "What happens to PII during normalization — encryption, tokenization, key management, audit posture",
+      "status": "resolved",
+      "category": "security",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Legal confirmed the existing BAA language covers third-party processing broadly enough to need only a short amendment, and confirmed on Priya's explicit ask that the amendment names the pre-normalization staging window specifically, not just processing generally. Priya states unambiguous acceptance ('I came away satisfied,' 'resolved on the substance'), the same bar Curtis met in call one. Marcus's technical answer (atomic, encrypted-before-accessible ingestion) is reaffirmed as unchanged and was never in question — this was purely a contracts gap, now closed on the merits. Only the signature is outstanding, which is administrative, not substantive.",
+      "last_updated_call": "d9125f23-c212-422c-b9f3-8cbcb1742683"
+    },
+    {
+      "objection_id": "obj_02",
+      "text": "Worry that consent/opt-out could be treated as one blanket flag and accidentally suppress required treatment/operational communications",
+      "status": "resolved",
+      "category": "security",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Consent/suppression state is modeled per communication purpose, not as a single flag, so a marketing opt-out can't suppress a required treatment or operational message. Naomi confirmed this was a real concern and that the architecture is the right boundary; the caveat that category setup is real work is implementation effort, not a persisting version of the blanket-flag risk. Not revisited since call one.",
+      "last_updated_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08"
+    },
+    {
+      "objection_id": "obj_03",
+      "text": "Concern about consent state living in a separate Apex-hosted database becoming its own audit exposure",
+      "status": "resolved",
+      "category": "security",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Consent state lives as a first-class object in the customer's own warehouse, not a separate Apex-hosted shadow database. Curtis confirmed this was a materially better answer than he expected, with no caveat given. Not revisited since call one.",
+      "last_updated_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08"
+    },
+    {
+      "objection_id": "obj_04",
+      "text": "Fear of silent breakage when a source system's schema drifts (field renamed/type changed)",
+      "status": "resolved",
+      "category": "integration",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Schema validation on ingestion flags breaking source changes via alert rather than passing them through silently, which was specifically the fear Naomi named. The caveat that a field fully disappearing still needs a manual mapping update is ordinary upkeep, not a return of silent failure. Not revisited since call one.",
+      "last_updated_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08"
+    },
+    {
+      "objection_id": "obj_05",
+      "text": "Race condition risk: outreach firing based on stale appointment status right after a last-minute reschedule/cancellation",
+      "status": "partially_resolved",
+      "category": "performance",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Marcus explicitly conceded the risk is 'not literally zero' and that protecting the appointment-reminder use case specifically would require deliberate custom design rather than being solved by default sync cadence. Naomi accepted this as an honest answer she preferred over false reassurance, but the underlying race-condition risk remains real and unresolved pending that design work. Not revisited this call.",
+      "last_updated_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08"
+    },
+    {
+      "objection_id": "obj_06",
+      "text": "Whether to build against Teradata now (pre-migration) or wait for the Snowflake migration to complete",
+      "status": "resolved",
+      "category": "integration",
+      "confidence": "high",
+      "raised_call": "da6dfc8d-55e7-4d42-b703-edbe2a09ce08",
+      "resolution_note": "Naomi's mapping showed most required data already in Snowflake; one scoped Teradata connector covers the call-center consent data, re-pointed later. Priya independently re-verified this plan in call three and came away satisfied. Mapping work confirmed on pace this call, nothing has changed that estimate. Not revisited substantively this call beyond a status check.",
+      "last_updated_call": "d9125f23-c212-422c-b9f3-8cbcb1742683"
+    },
+    {
+      "objection_id": "obj_07",
+      "text": "Whether the polling-based latency (minutes-to-tens-of-minutes) on the Teradata call-center connector is acceptable for a consent signal specifically, given the near-miss consent scenario from call 1",
+      "status": "partially_resolved",
+      "category": "performance",
+      "confidence": "high",
+      "raised_call": "e3905486-8589-42e0-af2c-f23386f39927",
+      "resolution_note": "Marcus was explicit this is 'additive' latency, not equivalent to near-real-time push. Derek and Naomi accepted this given low daily volume. Not revisited substantively this call — the latency tradeoff itself wasn't discussed, only connector timeline status.",
+      "last_updated_call": "e3905486-8589-42e0-af2c-f23386f39927"
+    }
+  ],
+  "integration_patterns": [
+    {
+      "description": "Consent Sync — unified consent/suppression layer read by all downstream destinations before send, push-based for supported destinations, polling fallback for legacy systems",
+      "systems": ["call center dialer (legacy/polling)", "email", "SMS/text", "legacy CRM"],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "Their call center dialer is presumed polling-only given its age; per-purpose consent category definitions are real setup work, not a five-minute config."
+    },
+    {
+      "description": "Segmentation & orchestration for clinically-driven live populations (e.g. care-gap outreach) with configurable channel sequencing; Apex explicitly does not own clinical overdue logic",
+      "systems": [],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": null
+    },
+    {
+      "description": "Call center dialer integration — live API push for modern dialers; for their legacy dialer, a batch list generated on a cadence rather than real-time push",
+      "systems": ["call center dialer"],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "No live push for their specific dialer given its age — batch list generation instead, accepted as still a major improvement over today's fully manual process. Phase 1 starts with email only; the dialer is deferred to a later phase once the email pattern is proven."
+    },
+    {
+      "description": "Data sourcing: Snowflake-primary architecture (patient demographics, clinical scheduling, health plan member data, recent claims all already migrated), with one scoped Teradata connector specifically for the call center system's opt-out/consent records, re-pointed to Snowflake once that system migrates or is retired. Legacy CRM data deliberately excluded — sunsetting, not worth building against.",
+      "systems": ["Teradata", "Snowflake"],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "The Teradata connector adds polling-based latency (minutes-to-tens-of-minutes) specifically for the call-center consent signal — see obj_07. Estimated resourcing: a handful of days of Naomi's team's time spread over a couple weeks for mapping/validation, plus Apex's connector build; Priya committed to protecting this as dedicated time. Mapping work confirmed on pace — schema field-naming is inconsistent in a couple of spots, described as ordinary annoyance, absorbed into the existing estimate."
+    },
+    {
+      "description": "Lineage Graph — per-record lineage/audit trail for every segment and outreach event, configurable retention, structured export",
+      "systems": [],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": null
+    },
+    {
+      "description": "Schema validation on ingestion — flags breaking source-schema changes via alert rather than failing silently",
+      "systems": [],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "A field fully disappearing (rather than changing type) still requires a manual mapping update; validation surfaces it via alert rather than preventing it outright."
+    },
+    {
+      "description": "De-identified analytics views plus role/dataset-scoped minimum-necessary access enforcement — lets an analytics team work against patterns in the data without full PHI access, scoped to what a specific use case actually needs",
+      "systems": [],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "De-identification methodology (e.g. expert determination vs. safe harbor) must be defined by Meridian's own compliance team — Apex does not unilaterally decide what counts as sufficiently de-identified for a given organization."
+    }
+  ],
+  "success_criteria": [
+    {
+      "customer_words": "the clinical team identifies the gap in one system, hands off a list, usually a spreadsheet, to the outreach team, who then has to manually cross-reference against — is this person actually reachable, have they opted out... And that whole handoff is slow and it's error prone, and periodically it just breaks down entirely.",
+      "interpreted": "The current care-gap outreach process is a manual, spreadsheet-based handoff with manual cross-referencing against consent/reachability, slow and error-prone enough that it periodically breaks down entirely.",
+      "metric_stated": null
+    },
+    {
+      "customer_words": "there was a period last year where two different outreach programs were both texting the same population of patients about unrelated things within the same week, and we got complaints, and that turned into an actual escalation.",
+      "interpreted": "Lack of cross-team coordination has caused real, escalated incidents of duplicate/uncoordinated outreach to the same patients.",
+      "metric_stated": null
+    },
+    {
+      "customer_words": "if compliance comes to me six months from now and says 'prove that this specific person didn't get contacted after opting out,' can I actually answer that from this, or is it more of a high-level summary?",
+      "interpreted": "Compliance needs individual-record-level proof of non-contact after opt-out, not a high-level summary.",
+      "metric_stated": null
+    },
+    {
+      "customer_words": "we've got retention obligations that run pretty long for some of this, I want to say seven years in some categories",
+      "interpreted": "Some record categories carry roughly seven-year retention obligations that must stay query-ready at full granularity, not rolled into aggregates.",
+      "metric_stated": "~7 years retention required for some record categories"
+    },
+    {
+      "customer_words": "across the health system and the plan side combined, it's a little over four hundred thousand unique individuals... Any single campaign might be anywhere from a few hundred people to, during open enrollment season, upwards of sixty, seventy thousand.",
+      "interpreted": "Total addressable population is roughly 400,000 individuals, with individual campaign sizes ranging from a few hundred up to 60-70k during the high-pressure open enrollment period.",
+      "metric_stated": "~400,000 individuals total; campaigns from a few hundred to 60-70k during open enrollment"
+    }
+  ],
+  "competitive": [
+    {
+      "vendor": "unnamed migration consultancy",
+      "context_verbatim": "We actually brought in a migration consultancy at one point to try to accelerate it, this was, I don't know, over a year ago now... the short version is it did not go the way anyone hoped, and we ended up doing most of the actual migration work ourselves anyway, just with less trust in outside help than we started with.",
+      "evaluation_status": "mentioned_only",
+      "confidence": "high",
+      "rationale": "A data-migration consulting engagement for their Teradata-to-Snowflake move, not a competing product in the CDP/consent-and-outreach category Apex is being evaluated for — unrelated to this buying decision. Purely historical color, no live comparison implied.",
+      "suggested_positioning": ""
+    },
+    {
+      "vendor": "unnamed prior vendor (audit trail without real export)",
+      "context_verbatim": "we've been burned by that exact thing before too, actually, with a different system entirely, unrelated to any of this.",
+      "evaluation_status": "mentioned_only",
+      "confidence": "high",
+      "rationale": "Explicitly disclaimed by Derek himself as 'a different system entirely, unrelated to any of this' — no name, no category, no comparative signal about a live alternative. Its substance is already captured via the Lineage Graph grounding in product_relevance.",
+      "suggested_positioning": ""
+    }
+  ],
+  "product_relevance": [
+    {
+      "need_stated": "consent and opt-out status lives differently in like four different places, and there's no single source of truth for 'has this person opted out of texts,' so it's entirely possible for someone to opt out through one channel and still get contacted through another because that system never heard about it.",
+      "relevant_release": "Consent Sync — a unified consent/suppression layer read by every outbound channel, so an opt-out on one channel is enforced everywhere, addressing exactly the fragmented-source-of-truth problem Curtis described.",
+      "confidence": "high"
+    },
+    {
+      "need_stated": "if compliance comes to me six months from now and says 'prove that this specific person didn't get contacted after opting out,' can I actually answer that from this, or is it more of a high-level summary?",
+      "relevant_release": "Lineage Graph — individual-record-level lineage and outreach history with structured export, built specifically to answer this exact audit question rather than a summary dashboard.",
+      "confidence": "high"
+    }
+  ],
+  "next_step": {
+    "present": true,
+    "described": "Commercial conversation with Priya to react to the proposal and make a real decision, not another round of information gathering. Daniel sends a calendar invite with a real agenda rather than a status check.",
+    "owner": "AE",
+    "date_committed": "2026-09-24",
+    "confidence": "high"
+  },
+  "open_risks": [
+    {
+      "risk": "Whether this platform replaces or just augments the sunsetting legacy marketing/campaign-authoring tool remains undecided — Priya chased marketing directly this call and got no answer yet, since marketing is mid-way through an unrelated tooling evaluation of its own",
+      "severity": "medium",
+      "confidence": "high"
+    }
+  ]
+}

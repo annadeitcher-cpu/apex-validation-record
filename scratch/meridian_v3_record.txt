@@ -1,0 +1,43 @@
+📌 *VALIDATION RECORD — v3* · Meridian Health — Customer Data Platform
+_Current state of the technical validation. This message updates in place._
+---
+*Meridian Health — Customer Data Platform*
+$310,000 · *24 days in Technical Validation* — 2x the 12-day Apex average · win rate drops to 22% past 14 days
+---
+*What's happened*
+Derek Osei, Director of Data Engineering, was our champion. He left the company. Priya Raman, VP of Data Platform, has taken over, with real budget authority of her own that Derek never had. She's the first identified economic buyer on the deal.
+
+Priya reopened the patient-data protection question. Curtis Nam, Security Engineer, already confirmed the controls were sound, and Priya isn't disputing that. She's asking something new: does Meridian's contract cover the moment data first arrives, before processing. Nobody had asked that before.
+
+Two smaller items stay open. One is whether Apex replaces Meridian's old marketing tool. The other is who owns building audience segments day to day.
+---
+*Progress toward stage exit — 3 of 5*
+✅ Economic buyer identified — Daniel
+✅ Integration approach agreed — Marcus
+✅ Success criteria captured — Daniel
+❌ Technical objections resolved — Marcus · a patient-data objection is open again
+❌ Next step scheduled — Daniel · no date committed
+---
+*What's blocking us*
+🔴 Meridian legal has to confirm their contract covers patient data during that first-arrival window. Priya won't move forward without it in writing.
+• A known reschedule delay and one slower data connector: accepted, not blocking.
+• Marketing tool replacement and segment ownership: open, Priya is working both.
+---
+*Daniel — AE*
+1. 🔴 Work with Apex legal to get a written position on staging-layer patient data by *Wed Sep 16*.
+2. Book the next call by *Wed Sep 16*. No date is set and this deal is 24 days in stage.
+3. Send the proposal to Priya by *Tue Sep 15*. She's waiting on numbers.
+4. Resend the SOC 2 report to Priya and Curtis by *Tue Sep 15*. Derek's inbox is deactivating.
+---
+*Marcus — SolCon*
+1. Document the Teradata bridge design by *Thu Sep 17* and send it to Naomi and Priya. Priya re-ran the whole discussion because nothing was written down.
+2. Nothing technical is blocking this deal.
+---
+*Need from Meridian*
+1. 🔴 Priya to connect Meridian legal with Apex legal on the contract question. Target *Fri Sep 18*. This is the only blocker.
+2. Priya to name a segment owner. Target *Fri Sep 25*.
+3. Priya to get marketing's answer on replacing the legacy CRM. Target *Fri Sep 25*.
+---
+*Worth raising*
+• *Consent Sync.* Opt-outs live in four separate systems today, so a patient can opt out of texts and still get an email. Consent Sync puts them all in one place. Curtis raised this on call one and nobody followed up.
+• *Lineage Graph.* Curtis asked whether he could prove a specific patient wasn't contacted after opting out. Lineage Graph answers that for any individual record. Raised on call one, never addressed.

@@ -1,0 +1,4 @@
+🔄 *WHAT CHANGED — v3* · Meridian Health — Customer Data Platform
+_3 material changes since the last update. Triggered by the Sep 12 call._
+---
+Derek Osei has left Meridian. Priya Raman, VP of Data Platform, has taken over as champion. She has real budget authority of her own, which makes her the deal's economic buyer too. The patient-data question is open again, same staging layer, but now a contract question rather than an encryption one.

@@ -1,0 +1,56 @@
+{
+  "status": "complete",
+  "version": 1,
+  "opportunity_id": "9b0307fa-0934-499c-85c4-089d097c7209",
+  "source_call_ids": ["6d3be20a-1f42-4109-b238-f7e380c2809a"],
+  "narrative": {
+    "whats_happened": "Sightline Retail's first technical validation call covered Segment Studio end to end. Paul Renner, Data Engineer, walked through the current manual segment-request process and pushed hard on whether Apex would repeat a prior self-serve tool's failure mode, requiring constant backend babysitting. Aditi Sharma gave concrete architectural differences and was upfront that some setup work is real, not zero-maintenance.\n\nAmara Diallo, Director of Growth Analytics, confirmed she owns budget for this category and doesn't expect a difficult internal sell. Both destinations Sightline needs, Klaviyo and Meta/Google paid social, are already supported.\n\nNothing is currently blocking. A priced proposal is due by end of week, with a follow-up already on the calendar.",
+    "whats_blocking": {
+      "blocking": [],
+      "not_blocking": [
+        "Segment Studio requires real one-time setup work and isn't zero-maintenance long-term (e.g. renamed columns need updates) — Paul and Amara explicitly accepted this as a reasonable tradeoff.",
+        "Complex segment logic (rolling-window comparisons) sometimes needs a one-time custom field from someone technical — accepted as an occasional, not constant, need."
+      ]
+    },
+    "ae_actions": [
+      "Send a priced proposal to Amara and Paul by end of week.",
+      "Confirm the Tuesday follow-up call and include the proposal beforehand."
+    ],
+    "sc_loop_close": "Nothing technical is blocking this deal. Every concern Paul raised — schema evolution, sync-failure visibility, complex segment logic, service-account permissions — got a direct, honest answer, including the parts that aren't zero-maintenance. Paul and Amara both explicitly said the honest framing landed better than a vendor promising no tradeoffs.",
+    "sc_actions": ["Send Paul the specific service-account permission list (4-5 grants)."]
+  },
+  "stage_exit_criteria": [
+    {"criterion": "All technical objections resolved or accepted", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Economic buyer identified", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Integration approach agreed", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Next step scheduled with owner and date", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Success criteria captured in customer's words", "owner": "AE", "met": true, "reason": null}
+  ],
+  "stakeholders": [
+    {"name": "Amara Diallo", "title": "Director, Growth Analytics", "role_inference": "economic_buyer", "confidence": "high", "first_seen_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "last_seen_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "status": "new_this_call", "evidence": "I do have budget allocated for something in this category for this fiscal year... if the number's in a reasonable range I don't anticipate this being a hard internal sell."},
+    {"name": "Paul Renner", "title": "Data Engineer", "role_inference": "technical_evaluator", "confidence": "high", "first_seen_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "last_seen_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "status": "new_this_call", "evidence": "Can I push on one more piece of it though, sorry — what about when segments get genuinely complicated..."}
+  ],
+  "objections": [
+    {"objection_id": "obj_01", "text": "Will Segment Studio become another full-time babysitting job like a prior self-serve tool", "category": "integration", "status": "partially_resolved", "confidence": "high", "resolution_note": "Live schema reads and monitored/alerted syncs address the core fear, but Aditi explicitly concedes it's not zero-maintenance (a renamed column needs a segment update) — a real conceded limitation Amara and Paul accepted, not a concern made untrue.", "raised_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "last_updated_call": "6d3be20a-1f42-4109-b238-f7e380c2809a"},
+    {"objection_id": "obj_02", "text": "Does the visual builder handle genuinely complex segment logic (joins, rolling-window comparisons)", "category": "integration", "status": "partially_resolved", "confidence": "high", "resolution_note": "Joins across modeled entities are handled natively; rolling-window comparisons sometimes need a one-time custom field from someone technical. Paul accepted this as an occasional need, not a recurring bottleneck.", "raised_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "last_updated_call": "6d3be20a-1f42-4109-b238-f7e380c2809a"},
+    {"objection_id": "obj_03", "text": "What permissions would the Apex service account need, given restricted PII tables", "category": "security", "status": "resolved", "confidence": "medium", "resolution_note": "Scoped to specific schemas/views, 4-5 grants, not account-admin. Paul asked for the actual permission list to bring to IT rather than raising further concern.", "raised_call": "6d3be20a-1f42-4109-b238-f7e380c2809a", "last_updated_call": "6d3be20a-1f42-4109-b238-f7e380c2809a"}
+  ],
+  "integration_patterns": [
+    {"description": "Warehouse-native activation — queries run directly against Sightline's Snowflake instance, no data copied into an Apex-controlled store", "systems": ["Snowflake"], "agreed": true, "confidence": "high", "caveats": null},
+    {"description": "Destination sync to existing marketing stack", "systems": ["Klaviyo", "Meta", "Google Ads"], "agreed": true, "confidence": "high", "caveats": "Both already-supported destination types; not new integration work."}
+  ],
+  "success_criteria": [
+    {"customer_words": "a simple one, maybe same day, few hours... if it's a more complex segment... it can be two, three days", "interpreted": "Segment requests currently take same-day to several days depending on complexity, with additional cycles when the first draft doesn't match intent.", "metric_stated": "2-3 days turnaround for complex segments"},
+    {"customer_words": "our best performing campaigns last year were the more targeted ones by like a wide margin", "interpreted": "Targeted campaigns already outperform batch-and-blast internally, giving a data-backed case for more personalization, not just a stated preference.", "metric_stated": null}
+  ],
+  "competitive": [
+    {"vendor": "unnamed prior tool (warehouse sync issues)", "context_verbatim": "we tried a tool a couple years back... it was constantly out of sync with the warehouse and marketing was targeting people based on data that was like a week stale, and it caused a whole thing with a customer getting an email about a product they'd already returned.", "evaluation_status": "mentioned_only", "confidence": "high", "rationale": "Historical, closed evaluation predating this deal; raised as context for skepticism about data freshness, not a live comparison.", "suggested_positioning": ""},
+    {"vendor": "unnamed self-serve tool (config/maintenance burden)", "context_verbatim": "we tried a 'self-serve' tool a few years back, different vendor... it required so much configuration and troubleshooting on the backend that Paul ended up basically babysitting it full time anyway", "evaluation_status": "mentioned_only", "confidence": "high", "rationale": "Historical, closed evaluation; directly informs obj_01 and obj_02 rather than being a live competitive comparison.", "suggested_positioning": ""}
+  ],
+  "product_relevance": [],
+  "next_step": {"present": true, "described": "Sofia sends a priced proposal by end of week; Sofia, Amara, Paul, and Aditi reconvene the following Tuesday to review it.", "owner": "AE", "date_committed": "2026-09-15", "confidence": "high"},
+  "open_risks": [
+    {"risk": "Amara's VP has not been directly engaged yet, though described as a courtesy step rather than a real approval gate", "severity": "low", "confidence": "medium"}
+  ],
+  "change_events": []
+}

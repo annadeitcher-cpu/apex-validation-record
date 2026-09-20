@@ -1,0 +1,20 @@
+[
+  {
+    "event_type": "objection_resolved",
+    "materiality": "material",
+    "detail": {
+      "objection_id": "obj_01",
+      "text": "PII/PHI handling at the pre-normalization staging layer",
+      "note": "Previously resurfaced (v3) as a BAA/compliance-coverage question. Legal confirmed a short amendment names the staging window specifically; Priya states explicit, unambiguous satisfaction. Material because a previously resurfaced objection finally closing is material, not the default 'minor' for an ordinary resolution."
+    }
+  },
+  {
+    "event_type": "stakeholder_added",
+    "materiality": "minor",
+    "detail": {
+      "name": "Dana Whitfield",
+      "title": "Marketing Ops",
+      "note": "Named by Priya as the formal segment owner/point of contact for segment quality and adoption. Operational role, not senior/decision-making — minor, same treatment as Owen Brady at Northwind."
+    }
+  }
+]

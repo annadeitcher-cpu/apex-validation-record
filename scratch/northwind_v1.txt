@@ -1,0 +1,38 @@
+*Northwind Logistics — Operational Data Unification*
+$180,000 · *16 days in Technical Validation* — 33% more than the 12-day Apex average · win rate drops to 22% past 14 days
+
+*What's happened*
+Kenji Watanabe, Head of Data Platform, and Lisa Ferreira, Senior Analytics Engineer, walked through Northwind's operational data spread across a warehouse management system, a transportation system, and telematics feeds from a mixed fleet of owned and contracted carriers. A recent cross-dock delay took most of a day to diagnose, and the customer found out before Northwind did.
+
+Marcus resolved five separate technical concerns in this call: whether unification claims would actually hold up, whether mixed-quality data would get blended without distinction, event ordering for late carrier updates, whether a missing alert could be diagnosed as easily as a firing one, and alert fatigue from bad thresholds. One real limitation was conceded rather than solved: the platform won't stop two people from defining conflicting rules. Lisa accepted that as a process problem for her own team.
+
+What's still open is how bad Northwind's cross-system identifier gap actually is. Nobody on the call knew. Lisa agreed to map it before the next call. Kenji is advocating for this internally but doesn't own budget himself, and Northwind's RevOps team hasn't been looped in yet.
+
+*Progress toward stage exit — 2 of 5*
+✅ Integration approach agreed — Marcus
+✅ Success criteria captured — Rachel
+❌ Technical objections resolved — Marcus · whether existing dashboards need rebuilding is still open
+❌ Economic buyer identified — Rachel · Northwind's RevOps hasn't been looped in yet
+❌ Next step scheduled — Rachel · no date is committed yet
+
+*What's blocking us*
+🔴 How bad Northwind's identifier gap actually is. The integration approach depends on it, and Lisa is mapping it now.
+• No economic buyer identified. RevOps hasn't been brought in, and there's no date for when that happens.
+• Duplicate rule definitions aren't prevented automatically: accepted, not blocking.
+• Whether existing dashboards need rework: open, deferred by mutual agreement.
+
+*Rachel — AE*
+1. Send the calendar invite for the follow-up call by *Fri Sep 18*. No date is set yet and this deal is already 33% over the average time in stage.
+2. Check in with Kenji on timing for bringing RevOps into a call by *Fri Sep 18*.
+3. Prepare directional pricing by *Fri Sep 18*, ready to firm up once Lisa's mapping lands. Don't quote a number yet.
+
+*Marcus — SolCon*
+1. Nothing technical is blocking this deal. The identifier-matching answer is Northwind's to bring back, not Marcus's to chase.
+
+*Need from Northwind*
+1. 🔴 Lisa to map correlating fields across WMS, TMS, and telematics. Target *Fri Sep 18*, about a week of her time.
+2. Kenji to loop in Northwind's RevOps stakeholder so budget ownership is real, not just advocacy. Target *Fri Sep 18*.
+
+*Worth raising*
+• *Lineage Graph.* Kenji said half of debugging time today goes to figuring out whether a rule was wrong, the data was late, or the data was wrong. Lineage Graph turns that into a lookup. Kenji raised it directly and Marcus connected it in the moment.
+• *Streamline Ingest.* Northwind's telematics feed batches every fifteen minutes, so position data is stale by the time anyone looks at it. Streamline Ingest gets that to sub-minute. Lisa raised it and Marcus connected it in the moment.

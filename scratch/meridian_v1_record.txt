@@ -1,0 +1,37 @@
+📌 *VALIDATION RECORD — v1* · Meridian Health — Customer Data Platform
+_Current state of the technical validation. This message updates in place._
+---
+*Meridian Health — Customer Data Platform*
+$310,000 · *23 days in Technical Validation* — 92% over the 12-day Apex average · win rate drops to 22% past 14 days
+---
+*What's happened*
+Meridian Health held its first technical validation call. Curtis Nam, Security Engineer, reviewed PII handling and came away satisfied on encryption, tokenization, customer-managed keys, and audit posture. Naomi Fletcher, Staff Data Architect, confirmed Apex's consent tracking and schema validation address her two biggest concerns.
+
+Derek Osei, Director of Data Engineering, emerged as champion. He wants to keep momentum on this deal and will check in on Naomi's mapping work himself. Economic sign-off sits with a VP of Data Platform who hasn't joined a call yet, briefed only secondhand by Derek.
+
+Two things are still open. One is a timing risk: outreach could still fire on a stale appointment status right after a last-minute reschedule, and fixing it needs dedicated design work. The other is whether to build on Teradata now or wait for Meridian's Snowflake migration, pending a source-table mapping Naomi is producing.
+---
+*Progress toward stage exit — 1 of 5*
+✅ Success criteria captured — Daniel
+❌ Technical objections resolved — Marcus · the Teradata vs. Snowflake sourcing question is still open, pending a mapping exercise
+❌ Economic buyer identified — Daniel · sign-off sits with a VP of Data Platform who hasn't joined a call yet
+❌ Integration approach agreed — Marcus · the Teradata/Snowflake sourcing pattern isn't agreed yet, pending the same mapping exercise
+❌ Next step scheduled — Daniel · a next step is described but no date is committed
+---
+*What's blocking us*
+🔴 The Teradata vs. Snowflake sourcing decision can't be made until Naomi delivers a table mapping of what's already in Snowflake. That mapping also has to land before the next call gets booked.
+• Economic buyer hasn't engaged directly: in progress, Derek has only briefed a VP of Data Platform at a summary level.
+• A stale-appointment-status timing risk: accepted, not blocking. Needs dedicated design work later.
+---
+*Daniel — AE*
+1. Send Meridian a same-day recap and architecture documentation to support Naomi's mapping work. Due *Thu Sep 17*.
+---
+*Marcus — SolCon*
+1. Nothing technical is blocking this deal right now.
+---
+*Need from Meridian*
+1. 🔴 Work with Naomi to get the Teradata vs. Snowflake source-table mapping done. Target *Thu Oct 1*. This is the blocker holding back the sourcing decision, the integration approach, and the next call.
+---
+*Worth raising*
+• *Consent Sync.* Opt-out status lives in four separate systems today, so a patient can opt out on one channel and still get contacted on another. Consent Sync puts every channel's opt-out status in one place. Curtis raised this on call one.
+• *Lineage Graph.* Curtis asked whether Apex could prove a specific patient wasn't contacted after opting out. Lineage Graph answers that for any individual record with a structured export. Curtis raised this on call one.

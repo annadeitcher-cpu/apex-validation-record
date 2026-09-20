@@ -1,0 +1,18 @@
+{
+  "objections": [
+    {"text_contains": "household", "expected_status": "open"},
+    {"text_contains": "family-plan", "expected_status": "resolved"},
+    {"text_contains": "probabilistic", "expected_status": "partially_resolved"},
+    {"text_contains": "failed", "expected_status": "resolved"},
+    {"text_contains": "bottleneck", "expected_status": "resolved"}
+  ],
+  "stakeholders": [
+    {"name": "Sung-min Park", "expected_role": "economic_buyer"},
+    {"name": "Hallie Brooks", "expected_role": "influencer"}
+  ],
+  "competitive_min_count": 0,
+  "competitive_max_count": 0,
+  "next_step": {"expected_present": true, "expected_owner": "AE", "date_committed_required": false},
+  "product_relevance_required_release": "Consent Sync",
+  "hallucination_forbidden_terms": ["signed contract", "next tuesday", "next wednesday", "next thursday", "next friday", "next monday", "committed price"]
+}

@@ -1,0 +1,83 @@
+{
+  "narrative_draft": {
+    "this_call_happened": "Meridian's legal team came back on the BAA question faster than expected: the existing language already covers third-party processing broadly, so it needs a short amendment naming the staging-layer window specifically, not a full renegotiation. Priya confirmed she is satisfied, explicitly echoing Curtis's call-one sign-off, and considers the objection resolved on substance while the amendment is out for signature. Separately, Priya named Dana Whitfield (marketing ops) as the segment owner, closing an open item from the first call. The two of them booked a commercial conversation for the specific date, with Daniel to send a real agenda rather than a status check. The legacy marketing-tool/campaign-authoring question is still unresolved; Priya chased it and marketing wasn't ready to answer.",
+    "this_call_blocking": {
+      "blocking": [],
+      "not_blocking": [
+        "BAA amendment — resolved on substance per Priya's explicit acceptance; only a signature is outstanding.",
+        "Legacy marketing tool / campaign-authoring scope — still genuinely undecided, but nothing architected depends on the answer."
+      ]
+    },
+    "ae_action_candidates": [
+      "Send the calendar invite and a real agenda for the commercial conversation on Sep 24.",
+      "Confirm with Priya whether the BAA amendment needs any internal governance review beyond legal signature, once she checks.",
+      "Update internal records so Dana Whitfield is the point of contact for segment definition and outreach-ops going forward."
+    ],
+    "sc_narrative_candidate": "Nothing technical reopened this call, and nothing new landed for Marcus to own. The atomic-ingestion answer from last time holds unchanged — this was purely a paperwork resolution, not anything that touches the technical mechanics."
+  },
+  "stakeholders": [
+    {
+      "name": "Priya Raman",
+      "title": "VP, Data Platform",
+      "role_inference": "economic_buyer",
+      "confidence": "high",
+      "evidence": "I made sure legal mapped it specifically to what I asked for, too, not just a general assurance about the platform."
+    },
+    {
+      "name": "Naomi Fletcher",
+      "title": "Staff Data Architect",
+      "role_inference": "technical_evaluator",
+      "confidence": "high",
+      "evidence": "We're partway into the mapping work, on pace for the timeline we talked about last time, nothing's surfaced that changes that estimate."
+    },
+    {
+      "name": "Curtis Nam",
+      "title": "Security Engineer",
+      "role_inference": "technical_evaluator",
+      "confidence": "medium",
+      "evidence": "Curtis says hi, by the way, he couldn't make it today, some internal thing came up on his end, nothing to do with any of this. (Not present this call; discussed, not observed directly — role carried forward, not reassessed.)"
+    },
+    {
+      "name": "Dana Whitfield",
+      "title": "Marketing Ops",
+      "role_inference": "influencer",
+      "confidence": "medium",
+      "evidence": "I talked to her manager, it's official as of this week, she's the named point of contact for segment quality and adoption going forward, not just informally the person people happen to ask. (Not present this call; role established secondhand via Priya, not her own words.)"
+    }
+  ],
+  "objections": [
+    {
+      "text": "PII/PHI handling at the pre-normalization staging layer — whether the BAA's language actually covers a third-party platform touching PHI at that window",
+      "category": "security",
+      "status": "resolved",
+      "confidence": "high",
+      "resolution_note": "Legal confirmed the existing BAA language covers third-party processing broadly enough to need only a short amendment, and confirmed on Priya's explicit ask that the amendment language names the pre-normalization staging window specifically, not just processing generally. Priya states unambiguous acceptance ('I came away satisfied,' 'resolved on the substance'), the same bar Curtis met in call one. Marcus's technical answer (atomic, encrypted-before-accessible ingestion) is explicitly reaffirmed as unchanged and never in question — this was purely a contracts gap, not a technical one, and both are now closed. Only the signature itself remains outstanding, which is administrative, not substantive."
+    }
+  ],
+  "integration_patterns": [
+    {
+      "description": "Data sourcing: Teradata call-center connector mapping work",
+      "systems": ["Teradata", "Snowflake"],
+      "agreed": true,
+      "confidence": "high",
+      "caveats": "Schema field-naming is inconsistent in a couple of spots on Meridian's side — described as ordinary annoyance, absorbed into the existing estimate, not adding days."
+    }
+  ],
+  "success_criteria": [],
+  "competitive": [],
+  "product_relevance": [],
+  "next_step": {
+    "present": true,
+    "described": "Commercial conversation with Priya to react to the proposal and make a real decision, not another round of information gathering. Daniel sends a calendar invite with a real agenda.",
+    "owner": "AE",
+    "date_committed": "2026-09-24",
+    "confidence": "high"
+  },
+  "open_risks": [
+    {
+      "risk": "Whether this platform replaces or just augments the sunsetting legacy marketing/campaign-authoring tool remains undecided — Priya chased marketing directly this call and got no answer yet, since marketing is mid-way through an unrelated tooling evaluation of its own",
+      "severity": "medium",
+      "confidence": "high"
+    }
+  ]
+}

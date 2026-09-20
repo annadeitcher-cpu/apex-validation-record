@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "version": 1,
+  "opportunity_id": "ef2d1447-007e-4050-acb2-e7548a5a01bf",
+  "source_call_ids": ["5653ea13-0c7c-46dc-a369-dbf42fde3d9f"],
+  "narrative": {
+    "whats_happened": "Vantage Media's first call centered on cross-property identity resolution. Sung-min Park, VP of Audience Data, and Hallie Brooks, Marketing Ops Manager, described five properties that can't currently recognize the same person across them, costing real subscription-conversion upside. Formal family-plan sharing resolves cleanly against Vantage's existing account structure; informal household sharing does not have a clean technical answer today, and Aditi was direct about that.\n\nHallie separately described, in detail, the manual cost of reconciling consent and suppression state across email, push, and paid social — four to five hours a week, and a real incident where a stale export led to a customer complaint that reached leadership. Neither Daniel nor Aditi connected this to Apex's actual Consent Sync release in the room.\n\nSung-min owns this budget line directly. A follow-up is agreed to close out the household-sharing question and review pricing, though no specific date was set.",
+    "whats_blocking": {
+      "blocking": [
+        "Informal household-sharing identity resolution has no clean technical answer yet — a real, acknowledged gap.",
+        "No specific date is committed for the follow-up call despite clear intent to reconvene."
+      ],
+      "not_blocking": [
+        "Probabilistic (device/browser) matching is getting less reliable industry-wide, but the architecture treats it as a supplementary layer, not load-bearing — an accepted, honestly-disclosed limitation, not a blocker."
+      ]
+    },
+    "ae_actions": [
+      "Send the recap plus the Lineage Graph and Warehouse Native Activation detail that didn't get covered live.",
+      "Put together real pricing numbers based on today's conversation.",
+      "Get a specific date on the calendar for the follow-up, rather than leaving it at 'the next couple weeks.'"
+    ],
+    "sc_loop_close": "Nothing has been marked resolved yet that would need SC loop-closing — this is the first call. Worth flagging: Hallie's suppression-reconciliation pain point (four to five hours a week, a real customer-facing incident) maps directly to Consent Sync, but nobody connected it live. Worth raising explicitly next time rather than letting it stay unaddressed.",
+    "sc_actions": []
+  },
+  "stage_exit_criteria": [
+    {"criterion": "All technical objections resolved or accepted", "owner": "SC", "met": false, "reason": "Informal household-sharing identity resolution remains genuinely unsolved — Aditi was explicit there's no clean technical answer for it yet."},
+    {"criterion": "Economic buyer identified", "owner": "AE", "met": true, "reason": null},
+    {"criterion": "Integration approach agreed", "owner": "SC", "met": true, "reason": null},
+    {"criterion": "Next step scheduled with owner and date", "owner": "AE", "met": false, "reason": "A follow-up call is agreed in principle, but no specific date was actually committed — only 'the next couple weeks.'"},
+    {"criterion": "Success criteria captured in customer's words", "owner": "AE", "met": true, "reason": null}
+  ],
+  "stakeholders": [
+    {"name": "Sung-min Park", "title": "VP, Audience Data", "role_inference": "economic_buyer", "confidence": "high", "first_seen_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_seen_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "status": "new_this_call", "evidence": "I own this budget line directly, this is within my authority to approve without it needing to go up another level, assuming the number's reasonable relative to what we discussed."},
+    {"name": "Hallie Brooks", "title": "Marketing Ops Manager", "role_inference": "influencer", "confidence": "medium", "first_seen_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_seen_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "status": "new_this_call", "evidence": "I don't want to assume this is purely a data-engineering lift on our side."}
+  ],
+  "objections": [
+    {"objection_id": "obj_01", "text": "Does identity resolution handle informal household/account sharing", "category": "integration", "status": "open", "confidence": "high", "resolution_note": "Aditi explicit: 'no clean technical solution' for informal sharing exists; only an ambiguity flag, not real resolution.", "raised_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_updated_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f"},
+    {"objection_id": "obj_02", "text": "Does identity resolution handle formal family-plan sharing", "category": "integration", "status": "resolved", "confidence": "high", "resolution_note": "A structurally different, easier case — named users under one billing account gives real signal. Hallie confirmed Vantage has that structure; no remaining concern raised.", "raised_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_updated_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f"},
+    {"objection_id": "obj_03", "text": "Reliability of probabilistic (device/browser) matching given ongoing cookie deprecation", "category": "performance", "status": "partially_resolved", "confidence": "medium", "resolution_note": "Aditi conceded the industry-wide degradation trend is real; mitigation is architectural (deterministic-first, probabilistic as supplementary), not a claim the underlying trend is solved.", "raised_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_updated_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f"},
+    {"objection_id": "obj_04", "text": "What happens on a failed or mid-refresh audience sync", "category": "performance", "status": "resolved", "confidence": "high", "resolution_note": "'Stale but correct' failure mode — last known good state served, failure surfaced for investigation. Sung-min explicitly welcomed this as the right default.", "raised_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_updated_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f"},
+    {"objection_id": "obj_05", "text": "Will identity-match review become a new bottleneck routed through Sung-min's team", "category": "integration", "status": "resolved", "confidence": "high", "resolution_note": "Reviewable by marketing ops itself, no deep engineering required. Both Hallie and Sung-min explicitly satisfied.", "raised_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f", "last_updated_call": "5653ea13-0c7c-46dc-a369-dbf42fde3d9f"}
+  ],
+  "integration_patterns": [
+    {"description": "Identity resolution using deterministic signals as the backbone (email, logged-in user ID, payment method, explicit account linking) with confidence-tiered probabilistic matching as a supplementary layer", "systems": [], "agreed": true, "confidence": "high", "caveats": "Informal/household sharing remains an open, unsolved edge case; formal family-plan structures are handled."},
+    {"description": "Activation to standard destinations with incremental sync where the destination platform's API supports it, rather than full re-upload each time", "systems": ["ESP", "push provider", "paid social platforms"], "agreed": true, "confidence": "high", "caveats": "Incremental support varies by destination platform's own API capabilities."},
+    {"description": "Warehouse-native activation — no separate copy of audience data outside Vantage's own environment", "systems": [], "agreed": true, "confidence": "high", "caveats": null}
+  ],
+  "success_criteria": [
+    {"customer_words": "someone who's a free reader on one property and a paying subscriber on another is a much better conversion target for the first property than a cold prospect... we can't act on that today", "interpreted": "Wants to identify and act on cross-property subscription-conversion opportunities that today's siloed, per-property systems can't surface.", "metric_stated": "a few percentage points of conversion lift across the base would matter at the board level"},
+    {"customer_words": "I spend, conservatively, four or five hours a week just manually cross-referencing these lists", "interpreted": "Wants to eliminate the roughly four-to-five hours a week of manual suppression-list reconciliation across channels.", "metric_stated": "4-5 hours per week"}
+  ],
+  "competitive": [],
+  "product_relevance": [
+    {"need_stated": "every channel basically has its own opt-out mechanism... None of those talk to each other... I spend, conservatively, four or five hours a week just manually cross-referencing these lists... an actual meaningful chunk of people who'd unsubscribed from email were still getting hit with paid social remarketing ads for the exact same campaign they'd opted out of... that turned into a small but real embarrassment that made its way up to leadership.", "relevant_release": "Consent Sync — a unified consent/suppression layer across every outbound channel so an opt-out on one channel is enforced everywhere, directly addressing the fragmented per-channel suppression Hallie described, including the exact stale-export/still-got-hit-with-remarketing scenario she lived through.", "confidence": "high"}
+  ],
+  "next_step": {"present": true, "described": "Daniel sends a recap plus outstanding detail on Lineage Graph and Warehouse Native Activation, and drafts pricing; a follow-up call is agreed to close out the household-sharing identity question and review pricing.", "owner": "AE", "date_committed": null, "confidence": "medium"},
+  "open_risks": [
+    {"risk": "Informal household-sharing identity resolution has no clean technical solution today", "severity": "medium", "confidence": "high"},
+    {"risk": "No specific date was committed for the follow-up call, despite clear intent to reconvene within 'the next couple weeks'", "severity": "low", "confidence": "high"}
+  ],
+  "change_events": []
+}

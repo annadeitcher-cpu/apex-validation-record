@@ -1,0 +1,15 @@
+{
+  "objections": [
+    {"text_contains": "babysitting", "expected_status": "partially_resolved"},
+    {"text_contains": "complex segment logic", "expected_status": "partially_resolved"},
+    {"text_contains": "permissions", "expected_status": "resolved"}
+  ],
+  "stakeholders": [
+    {"name": "Amara Diallo", "expected_role": "economic_buyer"},
+    {"name": "Paul Renner", "expected_role": "technical_evaluator"}
+  ],
+  "competitive_min_count": 2,
+  "next_step": {"expected_present": true, "expected_owner": "AE", "date_committed_required": true},
+  "product_relevance_required_release": null,
+  "hallucination_forbidden_terms": ["30 seconds", "15 minutes", "free trial", "discount"]
+}

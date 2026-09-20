@@ -1,0 +1,19 @@
+{
+  "objections": [
+    {"text_contains": "environment", "expected_status": "partially_resolved"},
+    {"text_contains": "decisioning", "expected_status": "resolved"},
+    {"text_contains": "encryption", "expected_status": "open"},
+    {"text_contains": "locked in", "expected_status": "open"},
+    {"text_contains": "cross-institution", "expected_status": "open"},
+    {"text_contains": "latency", "expected_status": "partially_resolved"}
+  ],
+  "stakeholders": [
+    {"name": "Nathan Cole", "expected_role": "technical_evaluator"},
+    {"name": "Unidentified Speaker", "expected_role": "unknown", "expected_confidence": "low"}
+  ],
+  "competitive_min_count": 0,
+  "competitive_max_count": 0,
+  "next_step": {"expected_present": false},
+  "product_relevance_required_release": null,
+  "hallucination_forbidden_terms": ["signed", "agreed to proceed", "committed budget", "Renata confirmed"]
+}

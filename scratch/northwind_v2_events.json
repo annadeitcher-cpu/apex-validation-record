@@ -1,0 +1,20 @@
+[
+  {
+    "event_type": "stakeholder_added",
+    "materiality": "minor",
+    "detail": {
+      "name": "Owen Brady",
+      "title": "Director, RevOps",
+      "note": "Joined for the first time. His commercial significance is captured separately via the competitor_introduced event for Tracewell, not double-counted here."
+    }
+  },
+  {
+    "event_type": "competitor_introduced",
+    "materiality": "material",
+    "detail": {
+      "vendor": "Tracewell",
+      "evaluation_status": "actively_evaluating",
+      "terms": "Lower quoted price; three-week pilot timeline; existing master services agreement between Northwind's finance org and Tracewell's parent company easing procurement."
+    }
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "status": "complete",
+  "version": 1,
+  "opportunity_id": "f68753b1-31b7-4010-ad78-8281f5ea47c3",
+  "source_call_ids": ["16b978e3-80fe-4047-a242-03713b7c7e44"],
+  "narrative": {
+    "whats_happened": "Calibre Financial's first call was a 90-minute governance deep-dive led by Nathan Cole, Data Governance Lead, and Yara Haddad, VP of Enterprise Data. A fourth, unidentified participant joined partway through and asked substantive questions throughout without ever introducing themselves.\n\nThe decisioning-boundary question — whether Apex ever makes autonomous judgments rather than executing customer-defined logic — got a clear, repeated, unambiguous answer that Nathan and Yara both explicitly accepted. Encryption and key-management mechanics were described in detail, but Nathan declined to call that resolved pending his own security team's validation. Vendor lock-in and cross-institution identity matching were both left genuinely open, the latter explicitly deferred as its own future conversation.\n\nNo economic buyer has engaged yet, and no next step was set. Yara was explicit that they need to loop in someone named Renata internally before this moves further.",
+    "whats_blocking": {
+      "blocking": [
+        "No next step exists — Calibre needs internal alignment (via Renata) before committing to one.",
+        "Encryption/key-management specifics still need Calibre's own security team validation.",
+        "Vendor lock-in and vendor-exit compliance fit are unanswered.",
+        "No economic buyer has engaged with this deal yet."
+      ],
+      "not_blocking": [
+        "Cross-institution identity matching against third-party-tokenized data is explicitly a later-phase question, not something blocking the current stage."
+      ]
+    },
+    "ae_actions": [
+      "Get the SOC 2 report and security-attestation package moving today, as promised.",
+      "Follow up on the vendor-exit compliance-checklist question rather than letting it drop.",
+      "Identify a named governance point of contact for Calibre, as raised by Nathan."
+    ],
+    "sc_loop_close": "Nothing has been marked resolved yet that would need SC loop-closing — this is the first call. Worth tracking into the next version: whether Calibre's security team validates the encryption/tokenization answers as-is, since Nathan explicitly withheld full acceptance pending that review.",
+    "sc_actions": ["Prepare to walk Calibre's security team through key-rotation mechanics in detail, as promised."]
+  },
+  "stage_exit_criteria": [
+    {"criterion": "All technical objections resolved or accepted", "owner": "SC", "met": false, "reason": "Several concerns remain genuinely open — encryption validation pending Calibre's own security review, vendor lock-in/exit compliance unanswered, and cross-institution data matching explicitly deferred."},
+    {"criterion": "Economic buyer identified", "owner": "AE", "met": false, "reason": "No stakeholder on this call showed budget authority; economic buyer not yet identified."},
+    {"criterion": "Integration approach agreed", "owner": "SC", "met": false, "reason": "The service-account integration pattern was described but not yet agreed — Calibre's security team still needs to validate it."},
+    {"criterion": "Next step scheduled with owner and date", "owner": "AE", "met": false, "reason": "No next step was set; Calibre wants to loop in an internal stakeholder (Renata) before committing to one."},
+    {"criterion": "Success criteria captured in customer's words", "owner": "AE", "met": true, "reason": null}
+  ],
+  "stakeholders": [
+    {"name": "Yara Haddad", "title": "VP, Enterprise Data", "role_inference": "champion", "confidence": "medium", "first_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "status": "new_this_call", "evidence": "Can we get into the governance and access control side more directly now? I think that's going to be the thing that actually determines whether this is viable for us."},
+    {"name": "Nathan Cole", "title": "Data Governance Lead", "role_inference": "technical_evaluator", "confidence": "high", "first_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "status": "new_this_call", "evidence": "I think — I think that's directionally right, but I'd want our security team to actually validate the specifics before I'd call it resolved."},
+    {"name": "Unidentified Speaker", "title": null, "role_inference": "unknown", "confidence": "low", "first_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_seen_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "status": "new_this_call", "evidence": "Sorry, sorry — got pulled out of another call, didn't mean to walk in mid-sentence. Please continue, I'll catch up."}
+  ],
+  "objections": [
+    {"objection_id": "obj_01", "text": "Where does Apex's processing actually run — Calibre's environment or an Apex-controlled store", "category": "data_residency", "status": "partially_resolved", "confidence": "medium", "resolution_note": "Runs against Calibre's own warehouse. Nathan called this 'the right starting answer' but explicitly reserved further follow-up.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"},
+    {"objection_id": "obj_02", "text": "Does Apex ever make autonomous decisioning judgments rather than executing logic Calibre defines", "category": "other", "status": "resolved", "confidence": "high", "resolution_note": "No exceptions, including for risk. Nathan: 'that's actually the answer I needed to hear.' Yara confirmed the boundary is non-negotiable and got the answer she needed.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"},
+    {"objection_id": "obj_03", "text": "Encryption, tokenization, and key-management mechanics for sensitive fields", "category": "security", "status": "open", "confidence": "high", "resolution_note": "Detailed answer given, but Nathan explicitly declined to accept it as resolved pending his own security team's validation.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"},
+    {"objection_id": "obj_04", "text": "How locked in would Calibre be, and does the export mechanism actually satisfy vendor-exit compliance obligations", "category": "procurement", "status": "open", "confidence": "high", "resolution_note": "Tom explicitly could not answer the compliance-checklist version of this question and took it as a real follow-up item.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"},
+    {"objection_id": "obj_05", "text": "Whether tokenization holds up for cross-institution matching against third-party-tokenized data", "category": "integration", "status": "open", "confidence": "high", "resolution_note": "Explicitly deferred as needing its own dedicated design conversation, not answered on this call.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"},
+    {"objection_id": "obj_06", "text": "Latency and event-ordering guarantees for the risk-alerting use case specifically", "category": "performance", "status": "partially_resolved", "confidence": "medium", "resolution_note": "A substantive, specific answer was given (bounded lateness window, configurable per use case), but the unidentified speaker still wants a dedicated risk-architecture session before treating it as settled.", "raised_call": "16b978e3-80fe-4047-a242-03713b7c7e44", "last_updated_call": "16b978e3-80fe-4047-a242-03713b7c7e44"}
+  ],
+  "integration_patterns": [
+    {"description": "Service-account access to Calibre's warehouse, scoped to specific schemas/views, reads broad-ish within scope and writes narrow to designated outputs, all logged", "systems": [], "agreed": false, "confidence": "medium", "caveats": "Nathan explicitly reserves full validation for his security team; the deal has no committed next step, so nothing here is agreed in the full sense yet."}
+  ],
+  "success_criteria": [
+    {"customer_words": "say a customer's spending pattern suggests they might be a good fit for a product they don't currently have, or conversely, their behavior suggests early signs of financial distress that risk would want to know about. Today, neither of those signals reaches anyone in a timely way", "interpreted": "Wants real-time signals — product-fit opportunities and early financial-distress risk indicators — to reach the right internal team promptly, which today's siloed systems can't do.", "metric_stated": null}
+  ],
+  "competitive": [],
+  "product_relevance": [
+    {"need_stated": "It's tracked, but not uniformly, honestly — retail banking has a reasonably mature consent framework, wealth management's is less mature, and I'd call risk's approach to permissible use more policy-based than systematized. / that unevenness is real, and it's honestly one of the things I'd want this to help us get in front of rather than just inherit.", "relevant_release": "Consent Sync — models consent and permissible-use state centrally and can surface coverage gaps rather than silently defaulting, directly addressing the cross-organization inconsistency Nathan and Yara described.", "confidence": "medium"}
+  ],
+  "next_step": {"present": false, "described": null, "owner": null, "date_committed": null, "confidence": null},
+  "open_risks": [
+    {"risk": "No economic buyer identified or engaged in this call", "severity": "high", "confidence": "high"},
+    {"risk": "Deal is genuinely undecided internally — scope, timing, and next step are all still open per Yara's own words", "severity": "medium", "confidence": "high"}
+  ],
+  "change_events": []
+}

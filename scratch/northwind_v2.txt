@@ -1,0 +1,40 @@
+*Northwind Logistics — Operational Data Unification*
+$180,000 · *16 days in Technical Validation* — 33% more than the 12-day Apex average · win rate drops to 22% past 14 days
+
+*What's happened*
+Owen Brady, Director of RevOps, joined for the first time. Lisa reported back on the correlating-fields mapping from the first call. The WMS-TMS join key is solid across every facility, including the weakest site, so that piece is no longer a real risk. Telematics-side matching still has no clean shipment-level identifier and needs real modeling work.
+
+Owen opened with direct commercial pressure. Northwind is actively evaluating Tracewell in parallel, with a lower quoted price and a three-week pilot timeline. Tracewell's parent company already holds a master services agreement with Northwind's finance organization from an unrelated business line, which makes procurement meaningfully easier on Northwind's side. Rachel's first answer pivoted to a technical strength instead of the commercial question Owen actually asked. Owen called it a dodge directly, and Rachel corrected course.
+
+Nothing was resolved today, on purpose. Two real objections are now open: Tracewell's lower price, and their easier procurement path. Owen wants something back sooner than two weeks or Tracewell becomes the more likely path.
+
+*Progress toward stage exit — 3 of 5*
+✅ Economic buyer identified — Rachel
+✅ Integration approach agreed — Marcus
+✅ Success criteria captured — Rachel
+❌ Technical objections resolved — Marcus · two commercial objections are open (price, procurement), plus whether existing dashboards need rebuilding
+❌ Next step scheduled — Rachel · no date is committed yet
+
+*What's blocking us*
+🔴 No commercial answer yet to Tracewell's price and procurement advantage. Owen asked directly and Rachel doesn't have one yet.
+• How long telematics-side identifier matching will take is still unknown, and it now feeds the competitive timeline argument too.
+• Whether existing dashboards need rework: open, not discussed this call.
+• No proactive prevention of conflicting rule definitions: accepted, not blocking.
+
+*Rachel — AE*
+1. 🔴 Get real pricing ready by *Fri Sep 18*. Owen wants something back sooner than two weeks.
+2. 🔴 Check with Apex's deal desk for a comparable procurement path by *Fri Sep 18*.
+3. Confirm what flexibility exists on contract length by *Fri Sep 18*.
+4. Send Owen a specific technical comparison against Tracewell by *Fri Sep 18*.
+
+*Marcus — SolCon*
+1. Write up concrete technical differentiation against Tracewell by *Fri Sep 18*. This supports Rachel's answer on price and procurement, it doesn't replace it.
+2. Give Lisa's telematics-matching timeline estimate once she has it, on the same timeline as pricing.
+
+*Need from Northwind*
+1. Owen to confirm whether the master agreement covers data platform spend specifically, or needs a separate rider. Target *Fri Sep 25*.
+2. Lisa to estimate telematics-matching timeline, alongside Rachel's pricing follow-up. Target *Fri Sep 18*.
+
+*Worth raising*
+• *Lineage Graph.* Kenji said half of debugging time today goes to figuring out whether a rule was wrong, the data was late, or the data was wrong. Lineage Graph turns that into a lookup. Raised on call one, not revisited this call.
+• *Streamline Ingest.* Northwind's telematics feed batches every fifteen minutes. Streamline Ingest gets that to sub-minute. Raised on call one, not revisited this call.
