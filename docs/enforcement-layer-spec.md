@@ -106,18 +106,14 @@ Computed from your actual records and action items:
 - Record coverage: % of technical validation calls with a complete Record
 - Median hours from call to Record generation
 
-### Panel B — outcome correlation (the instrument, clearly labeled)
+### Panel B — outcome correlation (scoped, not built)
 
-Structure the panel, populate it with placeholder data, and **label it explicitly**: `Awaiting volume — 90-day holdout design`.
+Structured here with placeholder data only, labeled explicitly: `Awaiting volume — 90-day holdout design`. Panel A is real, computed from the live database. Panel B isn't — it's the instrument for a correlation this system can't actually produce yet on six synthetic deals, not a finding. The 90-day measure is a holdout comparison for exactly that reason.
 
 - Days in Technical Validation: deals with all exit criteria met vs. not
 - Win rate: record-covered vs. holdout cohort
 - CS time-to-first-value: against the r=0.71 baseline
 - Post-demo touches by AE quartile: 0.7 → 1.5 target for bottom quartile
-
-**Say this out loud during the demo:** *"Panel A is real, computed from the records in this database. Panel B is the instrument, not a finding — I'm not going to claim an adherence-to-velocity correlation on nine synthetic deals. The 90-day measure is a holdout comparison for exactly that reason."*
-
-That sentence is worth more than any chart on the page. Volunteering the limit of your own evidence is the highest-credibility move available, and it preempts the question.
 
 ### Who opens it, and when
 
@@ -137,18 +133,3 @@ The dashboard isn't a thing managers are asked to visit. It's the artifact behin
 | Static dashboard | ~90 min | 6 — mock it if time runs out |
 
 **If the dashboard slips:** one screenshot of the layout with placeholder numbers, clearly labeled as a mock, is a completely acceptable deliverable. The assessment says not to over-index on polish, and the design is the point. What you cannot fake is the exit criteria and the closure tracking, because those are the answer to "who's enforcing this."
-
----
-
-## What this changes in the pitch
-
-The system now has four layers rather than two, and the fourth is the one the panel will push on:
-
-1. **Capture** — the Record, accruing across calls
-2. **Delivery** — Slack surfaces per consumer
-3. **Prompting** — private reminder, public escalation
-4. **Verification** — exit criteria, closure tracking, adherence reporting
-
-Layer 4 is the JD's language almost directly: *creates feedback loops that surface where execution can improve*. Before this, the system observed and suggested. Now it verifies.
-
-Worth adding to the corrections log: this was a gap you identified yourself late in the build — the system prompted but nothing checked whether anything happened, which meant every action item was a suggestion. Naming a hole you found in your own design, and what you did about it, is a strong answer to "what would you change."
